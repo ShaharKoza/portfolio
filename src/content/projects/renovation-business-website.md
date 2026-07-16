@@ -5,6 +5,7 @@ year: 2026
 tags: ['HTML', 'CSS', 'JavaScript', 'Web Design', 'SEO']
 featured: true
 order: 3
+stat: 'live for a real business'
 ---
 
 My father runs a renovation and project-management business in central

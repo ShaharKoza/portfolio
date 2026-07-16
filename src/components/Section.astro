@@ -2,17 +2,21 @@
 interface Props {
   eyebrow: string;
   title: string;
+  index?: string;
   moreHref?: string;
   moreLabel?: string;
 }
 
-const { eyebrow, title, moreHref, moreLabel } = Astro.props;
+const { eyebrow, title, index, moreHref, moreLabel } = Astro.props;
 ---
 
 <section class="section">
   <header class="section-header" data-reveal>
     <div>
-      <p class="eyebrow">{eyebrow}</p>
+      <p class="eyebrow">
+        {index && <span class="index gradient-text">{index}.</span>}
+        {eyebrow}
+      </p>
       <h2>{title}</h2>
     </div>
     {moreHref && <a class="more" href={moreHref}>{moreLabel ?? 'View all'} →</a>}
@@ -32,6 +36,11 @@ const { eyebrow, title, moreHref, moreLabel } = Astro.props;
   .section-header h2 {
     font-size: var(--text-xl);
     margin-top: var(--space-xs);
+  }
+
+  .index {
+    font-weight: 700;
+    margin-inline-end: 0.2em;
   }
 
   .more {

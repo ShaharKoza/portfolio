@@ -5,6 +5,7 @@ year: 2026
 tags: ['TypeScript', 'Node.js', 'PostgreSQL', 'Express', 'PowerShell']
 featured: true
 order: 1
+stat: '48 checks, zero manual effort'
 ---
 
 A production backend that automates security audits of Windows servers.

@@ -24,6 +24,7 @@
   /* Typography */
   --font-display: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
 
   --text-sm: 0.875rem;
   --text-base: 1rem;

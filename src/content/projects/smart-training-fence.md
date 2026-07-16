@@ -5,6 +5,7 @@ year: 2026
 tags: ['Raspberry Pi', 'IoT', 'Sensors', 'iOS']
 featured: true
 order: 2
+stat: 'from the wire to the iPhone'
 ---
 
 A smart training fence for dogs: a Raspberry Pi, a set of sensors, and an

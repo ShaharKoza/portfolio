@@ -5,6 +5,7 @@ import Section from '../components/Section.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import PostList from '../components/PostList.astro';
 import SkillsMarquee from '../components/SkillsMarquee.astro';
+import TerminalCard from '../components/TerminalCard.astro';
 
 // Drafts stay visible in dev so they can be previewed, but never ship in a build.
 const showDrafts = import.meta.env.DEV;
@@ -25,45 +26,48 @@ const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || 
   description="Shahar Kozniak builds systems that replace manual work: backend platforms, AI agents, IoT, and automation."
 >
   <section class="hero">
-    <p class="eyebrow" data-reveal>Backend &amp; AI Engineer</p>
-    <h1 data-reveal style="--reveal-delay: 80ms">Shahar Kozniak<span class="gradient-text">.</span></h1>
-    <p class="tagline" data-reveal style="--reveal-delay: 160ms">
-      I build systems that replace manual work:
-      <span class="rotator">
-        <span class="rotator-word gradient-text" id="rotator-word">backend platforms</span>
-      </span>
-    </p>
-    <p class="intro muted" data-reveal style="--reveal-delay: 240ms">
-      Most recently: a platform that audits Windows server fleets on its own,
-      a smart training fence built on a Raspberry Pi, and internal tools that
-      operations teams use every day.
-    </p>
-    <div class="cta" data-reveal style="--reveal-delay: 320ms">
-      <a class="btn btn-primary" href="/projects/">View projects</a>
-      <a class="btn btn-ghost" href="mailto:kshahar1315@gmail.com">Get in touch</a>
+    <div class="hero-text">
+      <p class="eyebrow" data-reveal>Backend &amp; AI Engineer</p>
+      <h1 data-reveal style="--reveal-delay: 80ms">Shahar Kozniak<span class="gradient-text">.</span></h1>
+      <p class="tagline" data-reveal style="--reveal-delay: 160ms">
+        I build systems that replace manual work:
+        <span class="rotator">
+          <span class="rotator-word gradient-text" id="rotator-word">backend platforms</span>
+        </span>
+      </p>
+      <p class="intro muted" data-reveal style="--reveal-delay: 240ms">
+        Most recently: a platform that audits Windows server fleets on its
+        own, a smart training fence built on a Raspberry Pi, and internal
+        tools that operations teams use every day.
+      </p>
+      <div class="cta" data-reveal style="--reveal-delay: 320ms">
+        <a class="btn btn-primary" href="/projects/">View projects</a>
+        <a class="btn btn-ghost" href="mailto:kshahar1315@gmail.com">Get in touch</a>
+      </div>
     </div>
+    <TerminalCard />
   </section>
 
-  <Section eyebrow="Selected work" title="Projects" moreHref="/projects/">
+  <Section eyebrow="Selected work" title="Projects" index="01" moreHref="/projects/">
     <div class="card-grid">
       {featured.map((project, i) => <ProjectCard project={project} delay={i * 90} />)}
     </div>
   </Section>
 
-  <Section eyebrow="Toolbox" title="Skills">
+  <Section eyebrow="Toolbox" title="Skills" index="02">
     <SkillsMarquee />
   </Section>
 
   {
     latestPosts.length > 0 && (
-      <Section eyebrow="Notes" title="Writing" moreHref="/writing/">
+      <Section eyebrow="Notes" title="Writing" index="03" moreHref="/writing/">
         <PostList posts={latestPosts} />
       </Section>
     )
   }
 
   <section class="section contact-cta" data-reveal>
-    <p class="eyebrow">Contact</p>
+    <p class="eyebrow"><span class="cta-index gradient-text">04.</span> Contact</p>
     <h2>Get in <span class="gradient-text">touch</span></h2>
     <p class="muted">
       I'm open to backend and AI roles. Email is the fastest way to reach me.
@@ -91,13 +95,25 @@ const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || 
 <style>
   .hero {
     padding-block: var(--space-3xl);
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: var(--space-2xl);
+    min-height: 66dvh;
+  }
+
+  @media (min-width: 920px) {
+    .hero {
+      grid-template-columns: 1.25fr 0.75fr;
+    }
+  }
+
+  .hero-text {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-lg);
     max-width: 52rem;
-    min-height: 62dvh;
-    justify-content: center;
   }
 
   .hero h1 {
@@ -153,5 +169,10 @@ const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || 
 
   .contact-cta h2 {
     font-size: var(--text-title);
+  }
+
+  .cta-index {
+    font-weight: 700;
+    margin-inline-end: 0.2em;
   }
 </style>

@@ -1,0 +1,163 @@
+---
+// Decorative terminal window for the hero. Lines type in one after another.
+const lines = [
+  { prompt: 'whoami', output: 'shahar-kozniak' },
+  { prompt: 'cat role.txt', output: 'Backend & AI Engineer' },
+  { prompt: './status --now', output: 'open to opportunities', accent: true },
+];
+---
+
+<div class="terminal glow-card" data-reveal style="--reveal-delay: 400ms" aria-hidden="true">
+  <div class="term-bar">
+    <span class="dot dot-r"></span>
+    <span class="dot dot-y"></span>
+    <span class="dot dot-g"></span>
+    <span class="term-title">shahar@dev ~ zsh</span>
+  </div>
+  <div class="term-body">
+    {
+      lines.map((line, i) => (
+        <>
+          <p class="term-line" style={`--d: ${i * 900}ms`}>
+            <span class="prompt">$</span> {line.prompt}
+          </p>
+          <p class={`term-line output ${line.accent ? 'accent' : ''}`} style={`--d: ${i * 900 + 450}ms`}>
+            {line.accent && <span class="pulse" />}
+            {line.output}
+          </p>
+        </>
+      ))
+    }
+    <p class="term-line caret-line" style={`--d: ${lines.length * 900}ms`}>
+      <span class="prompt">$</span> <span class="caret"></span>
+    </p>
+  </div>
+</div>
+
+<style>
+  .terminal {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    background: rgba(10, 9, 16, 0.75);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45), 0 0 40px rgba(139, 92, 246, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .term-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .dot {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+  }
+
+  .dot-r {
+    background: #ff5f57;
+  }
+
+  .dot-y {
+    background: #febc2e;
+  }
+
+  .dot-g {
+    background: #28c840;
+  }
+
+  .term-title {
+    margin-inline-start: auto;
+    color: var(--ink-soft);
+    font-size: 0.75rem;
+  }
+
+  .term-body {
+    padding: 1.1rem 1.2rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .term-line {
+    color: var(--ink);
+    opacity: 0;
+    animation: term-in 1ms linear forwards;
+    animation-delay: var(--d, 0ms);
+    white-space: nowrap;
+  }
+
+  .prompt {
+    color: var(--cyan);
+    font-weight: 700;
+  }
+
+  .output {
+    color: var(--ink-soft);
+    padding-inline-start: 1.1rem;
+  }
+
+  .output.accent {
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pulse {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: #28c840;
+    box-shadow: 0 0 10px rgba(40, 200, 64, 0.8);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+
+  .caret {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.1em;
+    vertical-align: text-bottom;
+    background: var(--ink);
+    animation: blink 1.05s steps(1) infinite;
+  }
+
+  @keyframes term-in {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes pulse {
+    50% {
+      transform: scale(1.35);
+      opacity: 0.7;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .term-line {
+      opacity: 1;
+      animation: none;
+    }
+
+    .caret,
+    .pulse {
+      animation: none;
+    }
+  }
+</style>

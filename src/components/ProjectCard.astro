@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { project, delay = 0 } = Astro.props;
-const { title, summary, year, tags } = project.data;
+const { title, summary, year, tags, stat } = project.data;
 ---
 
 <article class="card glow-card" data-reveal style={`--reveal-delay: ${delay}ms`}>
@@ -17,6 +17,7 @@ const { title, summary, year, tags } = project.data;
   </div>
   <h3><a href={`/projects/${project.id}/`}>{title}</a></h3>
   <p class="muted">{summary}</p>
+  {stat && <p class="stat"><span class="gradient-text">{stat}</span></p>}
   {
     tags.length > 0 && (
       <ul class="tags" aria-label="Technologies">
@@ -104,6 +105,13 @@ const { title, summary, year, tags } = project.data;
 
   .card p {
     font-size: var(--text-base);
+  }
+
+  .stat {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
 
   .tags {

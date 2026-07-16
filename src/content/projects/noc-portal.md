@@ -5,6 +5,7 @@ year: 2026
 tags: ['JavaScript', 'HTML', 'CSS', 'Knowledge Systems']
 featured: true
 order: 4
+stat: 'one search box, zero frameworks'
 ---
 
 An internal portal I built for a network operations team. NOC knowledge
