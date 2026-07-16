@@ -1,0 +1,157 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PostList from '../components/PostList.astro';
+import SkillsMarquee from '../components/SkillsMarquee.astro';
+
+// Drafts stay visible in dev so they can be previewed, but never ship in a build.
+const showDrafts = import.meta.env.DEV;
+
+const featured = (
+  await getCollection('projects', ({ data }) => (showDrafts || !data.draft) && data.featured)
+)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 4);
+
+const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<Base
+  title="Shahar Kozniak | Backend & AI Engineer"
+  description="Shahar Kozniak builds systems that replace manual work: backend platforms, AI agents, IoT, and automation."
+>
+  <section class="hero">
+    <p class="eyebrow" data-reveal>Backend &amp; AI Engineer</p>
+    <h1 data-reveal style="--reveal-delay: 80ms">Shahar Kozniak<span class="gradient-text">.</span></h1>
+    <p class="tagline" data-reveal style="--reveal-delay: 160ms">
+      I build systems that replace manual work:
+      <span class="rotator">
+        <span class="rotator-word gradient-text" id="rotator-word">backend platforms</span>
+      </span>
+    </p>
+    <p class="intro muted" data-reveal style="--reveal-delay: 240ms">
+      Most recently: a platform that audits Windows server fleets on its own,
+      a smart training fence built on a Raspberry Pi, and internal tools that
+      operations teams use every day.
+    </p>
+    <div class="cta" data-reveal style="--reveal-delay: 320ms">
+      <a class="btn btn-primary" href="/projects/">View projects</a>
+      <a class="btn btn-ghost" href="mailto:kshahar1315@gmail.com">Get in touch</a>
+    </div>
+  </section>
+
+  <Section eyebrow="Selected work" title="Projects" moreHref="/projects/">
+    <div class="card-grid">
+      {featured.map((project, i) => <ProjectCard project={project} delay={i * 90} />)}
+    </div>
+  </Section>
+
+  <Section eyebrow="Toolbox" title="Skills">
+    <SkillsMarquee />
+  </Section>
+
+  {
+    latestPosts.length > 0 && (
+      <Section eyebrow="Notes" title="Writing" moreHref="/writing/">
+        <PostList posts={latestPosts} />
+      </Section>
+    )
+  }
+
+  <section class="section contact-cta" data-reveal>
+    <p class="eyebrow">Contact</p>
+    <h2>Get in <span class="gradient-text">touch</span></h2>
+    <p class="muted">
+      I'm open to backend and AI roles. Email is the fastest way to reach me.
+    </p>
+    <a class="btn btn-primary" href="mailto:kshahar1315@gmail.com">kshahar1315@gmail.com</a>
+  </section>
+</Base>
+
+<script>
+  const words = ['backend platforms', 'AI agents', 'IoT systems', 'automation at scale'];
+  const el = document.getElementById('rotator-word');
+  if (el && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let i = 0;
+    setInterval(() => {
+      el.classList.add('is-swapping');
+      setTimeout(() => {
+        i = (i + 1) % words.length;
+        el.textContent = words[i];
+        el.classList.remove('is-swapping');
+      }, 280);
+    }, 2600);
+  }
+</script>
+
+<style>
+  .hero {
+    padding-block: var(--space-3xl);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    max-width: 52rem;
+    min-height: 62dvh;
+    justify-content: center;
+  }
+
+  .hero h1 {
+    font-size: var(--text-hero);
+  }
+
+  .tagline {
+    font-family: var(--font-display);
+    font-weight: 560;
+    font-size: var(--text-xl);
+    line-height: 1.25;
+  }
+
+  .rotator {
+    display: inline-block;
+  }
+
+  .rotator-word {
+    display: inline-block;
+    transition: opacity 0.28s ease, transform 0.28s ease;
+  }
+
+  .rotator-word.is-swapping {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+
+  .intro {
+    font-size: var(--text-md);
+    max-width: 40rem;
+  }
+
+  .cta {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-top: var(--space-sm);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .contact-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+    border-top: 1px solid var(--line);
+  }
+
+  .contact-cta h2 {
+    font-size: var(--text-title);
+  }
+</style>

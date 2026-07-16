@@ -1,0 +1,101 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const showDrafts = import.meta.env.DEV;
+  const projects = await getCollection('projects', ({ data }) => showDrafts || !data.draft);
+  return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { title, summary, year, tags, links } = project.data;
+---
+
+<Base title={`${title} | Shahar Kozniak`} description={summary}>
+  <article class="project">
+    <header class="page-header">
+      <p class="eyebrow" data-reveal>Project · {year}</p>
+      <h1 data-reveal style="--reveal-delay: 80ms">{title}</h1>
+      <p class="muted lede" data-reveal style="--reveal-delay: 160ms">{summary}</p>
+      <ul class="tags" aria-label="Technologies" data-reveal style="--reveal-delay: 220ms">
+        {tags.map((tag) => <li>{tag}</li>)}
+      </ul>
+      {
+        (links.github || links.live) && (
+          <p class="links">
+            {links.github && <a href={links.github}>Source ↗</a>}
+            {links.live && <a href={links.live}>Live ↗</a>}
+          </p>
+        )
+      }
+    </header>
+
+    <div class="prose" data-reveal>
+      <Content />
+    </div>
+
+    <p class="back"><a href="/projects/">← All projects</a></p>
+  </article>
+</Base>
+
+<style>
+  .page-header {
+    padding-block: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: var(--width-prose);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: var(--space-xl);
+  }
+
+  .page-header h1 {
+    font-size: var(--text-title);
+  }
+
+  .lede {
+    font-size: var(--text-md);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    list-style: none;
+    padding: 0;
+  }
+
+  .tags li {
+    font-size: var(--text-sm);
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.1rem 0.7rem;
+  }
+
+  .links {
+    display: flex;
+    gap: var(--space-lg);
+    font-weight: 500;
+  }
+
+  .links a {
+    color: var(--cyan);
+  }
+
+  .back {
+    margin-block: var(--space-2xl);
+    font-size: var(--text-sm);
+  }
+
+  .back a {
+    color: var(--ink-soft);
+  }
+
+  .back a:hover {
+    color: var(--cyan);
+  }
+</style>

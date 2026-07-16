@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Not found | Shahar Kozniak" description="This page doesn't exist.">
+  <div class="notfound">
+    <p class="eyebrow">404</p>
+    <h1>Page not <span class="gradient-text">found</span></h1>
+    <p class="muted">The page you're looking for doesn't exist or has moved.</p>
+    <p><a class="btn btn-ghost" href="/">← Back home</a></p>
+  </div>
+</Base>
+
+<style>
+  .notfound {
+    padding-block: var(--space-3xl);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .notfound h1 {
+    font-size: var(--text-hero);
+  }
+</style>

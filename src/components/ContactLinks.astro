@@ -1,0 +1,33 @@
+---
+// Add GitHub / LinkedIn here once the user provides the URLs.
+const links = [{ href: 'mailto:kshahar1315@gmail.com', label: 'Email' }];
+---
+
+<ul class="contact-links">
+  {
+    links.map((link) => (
+      <li>
+        <a href={link.href}>{link.label}</a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .contact-links {
+    display: flex;
+    gap: var(--space-lg);
+    list-style: none;
+    padding: 0;
+  }
+
+  .contact-links a {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+
+  .contact-links a:hover {
+    color: var(--cyan);
+  }
+</style>

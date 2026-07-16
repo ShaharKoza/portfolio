@@ -1,0 +1,127 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  delay?: number;
+}
+
+const { project, delay = 0 } = Astro.props;
+const { title, summary, year, tags } = project.data;
+---
+
+<article class="card glow-card" data-reveal style={`--reveal-delay: ${delay}ms`}>
+  <div class="card-top">
+    <span class="eyebrow">{year}</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href={`/projects/${project.id}/`}>{title}</a></h3>
+  <p class="muted">{summary}</p>
+  {
+    tags.length > 0 && (
+      <ul class="tags" aria-label="Technologies">
+        {tags.map((tag) => (
+          <li>{tag}</li>
+        ))}
+      </ul>
+    )
+  }
+</article>
+
+<style>
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-xl);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    overflow: hidden;
+    height: 100%;
+    transition:
+      border-color var(--transition),
+      transform var(--transition-slow),
+      box-shadow var(--transition-slow);
+  }
+
+  /* Mouse-follow highlight, driven by --mx/--my set in Base's script */
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 0%),
+      rgba(139, 92, 246, 0.14),
+      transparent 65%
+    );
+    opacity: 0;
+    transition: opacity var(--transition);
+    pointer-events: none;
+  }
+
+  .card:hover {
+    border-color: rgba(139, 92, 246, 0.5);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 44px rgba(139, 92, 246, 0.16);
+  }
+
+  .card:hover::before {
+    opacity: 1;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .arrow {
+    color: var(--ink-soft);
+    font-size: var(--text-md);
+    transition: transform var(--transition), color var(--transition);
+  }
+
+  .card:hover .arrow {
+    color: var(--cyan);
+    transform: translate(3px, -3px);
+  }
+
+  .card h3 {
+    font-size: var(--text-lg);
+  }
+
+  .card h3 a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .card h3 a:hover {
+    color: var(--ink);
+  }
+
+  .card p {
+    font-size: var(--text-base);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    list-style: none;
+    padding: 0;
+    margin-top: auto;
+    padding-top: var(--space-sm);
+  }
+
+  .tags li {
+    font-size: var(--text-sm);
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.1rem 0.7rem;
+  }
+</style>

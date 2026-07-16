@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+
+const showDrafts = import.meta.env.DEV;
+const posts = (await getCollection('writing', ({ data }) => showDrafts || !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Base
+  title="Writing | Shahar Kozniak"
+  description="Notes on software, AI, and working methods by Shahar Kozniak."
+>
+  <header class="page-header">
+    <p class="eyebrow" data-reveal>Notes</p>
+    <h1 data-reveal style="--reveal-delay: 80ms">Writing</h1>
+    <p class="muted" data-reveal style="--reveal-delay: 160ms">
+      Occasional notes on software, AI, and how I work.
+    </p>
+  </header>
+
+  {
+    posts.length > 0 ? (
+      <div data-reveal>
+        <PostList posts={posts} />
+      </div>
+    ) : (
+      <p class="muted empty">Nothing published yet. First post coming soon.</p>
+    )
+  }
+</Base>
+
+<style>
+  .page-header {
+    padding-block: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    max-width: 46rem;
+  }
+
+  .page-header h1 {
+    font-size: var(--text-title);
+  }
+
+  .empty {
+    padding-block: var(--space-xl);
+  }
+</style>

@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactLinks from '../components/ContactLinks.astro';
+// Copy pending final review with Shahar before deploy.
+---
+
+<Base
+  title="About | Shahar Kozniak"
+  description="Who Shahar Kozniak is, how he works, and what he's focused on."
+>
+  <header class="page-header">
+    <p class="eyebrow" data-reveal>Profile</p>
+    <h1 data-reveal style="--reveal-delay: 80ms">
+      About <span class="gradient-text">me</span>
+    </h1>
+  </header>
+
+  <div class="prose" data-reveal>
+    <p>
+      I'm Shahar Kozniak, a backend and AI engineer. My work sits where
+      software meets manual labor: I look for the processes that eat
+      someone's hours every week and turn them into systems.
+    </p>
+
+    <h2>How I work</h2>
+    <p>
+      I plan before I build. Unknowns get mapped first and resolved in order
+      of risk, decisions run on data rather than gut feeling, and I hold a
+      high bar for what leaves my hands. I'd rather ship fewer things that
+      hold up than many things that almost do.
+    </p>
+
+    <h2>What I'm focused on</h2>
+    <ul>
+      <li>
+        Automation that pays for itself, like a platform that turned a
+        multi-day manual server audit into a background job.
+      </li>
+      <li>
+        Working with AI seriously. Agents and AI tooling are part of how I
+        build now, and I invest in getting better at them constantly.
+      </li>
+      <li>
+        Range on purpose: backend platforms, IoT hardware, internal tools
+        and customer-facing web, with the same discipline across all of
+        them.
+      </li>
+    </ul>
+
+    <h2>Get in touch</h2>
+    <p>
+      Email is fastest. If you're hiring for a role where automation,
+      reliability and ownership matter, I want to hear about it.
+    </p>
+  </div>
+
+  <div class="contact" data-reveal>
+    <ContactLinks />
+  </div>
+</Base>
+
+<style>
+  .page-header {
+    padding-block: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .page-header h1 {
+    font-size: var(--text-title);
+  }
+
+  .contact {
+    margin-block: var(--space-2xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--line);
+  }
+</style>

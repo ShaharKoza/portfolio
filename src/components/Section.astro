@@ -1,0 +1,47 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  moreHref?: string;
+  moreLabel?: string;
+}
+
+const { eyebrow, title, moreHref, moreLabel } = Astro.props;
+---
+
+<section class="section">
+  <header class="section-header" data-reveal>
+    <div>
+      <p class="eyebrow">{eyebrow}</p>
+      <h2>{title}</h2>
+    </div>
+    {moreHref && <a class="more" href={moreHref}>{moreLabel ?? 'View all'} →</a>}
+  </header>
+  <slot />
+</section>
+
+<style>
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  .section-header h2 {
+    font-size: var(--text-xl);
+    margin-top: var(--space-xs);
+  }
+
+  .more {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  .more:hover {
+    color: var(--cyan);
+  }
+</style>

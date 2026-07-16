@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const showDrafts = import.meta.env.DEV;
+const projects = (await getCollection('projects', ({ data }) => showDrafts || !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<Base
+  title="Projects | Shahar Kozniak"
+  description="What Shahar Kozniak has built: automated auditing, AI, IoT, and web systems."
+>
+  <header class="page-header">
+    <p class="eyebrow" data-reveal>Selected work</p>
+    <h1 data-reveal style="--reveal-delay: 80ms">
+      Things I've <span class="gradient-text">built</span>
+    </h1>
+    <p class="muted" data-reveal style="--reveal-delay: 160ms">
+      Real systems solving real problems: what they do and the engineering
+      decisions behind them.
+    </p>
+  </header>
+
+  <div class="card-grid">
+    {projects.map((project, i) => <ProjectCard project={project} delay={i * 90} />)}
+  </div>
+</Base>
+
+<style>
+  .page-header {
+    padding-block: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    max-width: 46rem;
+  }
+
+  .page-header h1 {
+    font-size: var(--text-title);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: var(--space-lg);
+    padding-bottom: var(--space-2xl);
+  }
+</style>
