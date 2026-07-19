@@ -1,6 +1,6 @@
 # Shahar Kozniak: Portfolio
 
-Personal site of Shahar Kozniak, Backend & AI Engineer: projects, profile,
+Personal site of Shahar Kozniak, AI & Automation Developer: projects, profile,
 and writing. Built with [Astro](https://astro.build), a hand-rolled
 design-token system (no CSS framework), self-hosted fonts, and light vanilla
 JS for the animations.

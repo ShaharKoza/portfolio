@@ -48,4 +48,10 @@ const projects = (await getCollection('projects', ({ data }) => showDrafts || !d
     gap: var(--space-lg);
     padding-bottom: var(--space-2xl);
   }
+
+  @media (min-width: 68rem) {
+    .card-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
 </style>

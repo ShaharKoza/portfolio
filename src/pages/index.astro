@@ -22,27 +22,27 @@ const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || 
 ---
 
 <Base
-  title="Shahar Kozniak | Backend & AI Engineer"
-  description="Shahar Kozniak builds systems that replace manual work: backend platforms, AI agents, IoT, and automation."
+  title="Shahar Kozniak | AI & Automation Developer"
+  description="Shahar Kozniak builds systems that replace manual work: AI agents, smart automations, and backend platforms."
 >
   <section class="hero">
     <div class="hero-text">
-      <p class="eyebrow" data-reveal>Backend &amp; AI Engineer</p>
+      <p class="eyebrow" data-reveal>AI &amp; Automation Developer</p>
       <h1 data-reveal style="--reveal-delay: 80ms">Shahar Kozniak<span class="gradient-text">.</span></h1>
       <p class="tagline" data-reveal style="--reveal-delay: 160ms">
         I build systems that replace manual work:
         <span class="rotator">
-          <span class="rotator-word gradient-text" id="rotator-word">backend platforms</span>
+          <span class="rotator-word gradient-text" id="rotator-word">AI agents</span>
         </span>
       </p>
       <p class="intro muted" data-reveal style="--reveal-delay: 240ms">
         Most recently: a platform that audits Windows server fleets on its
-        own, a smart training fence built on a Raspberry Pi, and internal
+        own, a smart kennel system built on a Raspberry Pi, and internal
         tools that operations teams use every day.
       </p>
       <div class="cta" data-reveal style="--reveal-delay: 320ms">
         <a class="btn btn-primary" href="/projects/">View projects</a>
-        <a class="btn btn-ghost" href="mailto:kshahar1315@gmail.com">Get in touch</a>
+        <a class="btn btn-ghost" href="mailto:kshahar1315@gmail.com">✉ Email me</a>
       </div>
     </div>
     <TerminalCard />
@@ -70,14 +70,17 @@ const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || 
     <p class="eyebrow"><span class="cta-index gradient-text">04.</span> Contact</p>
     <h2>Get in <span class="gradient-text">touch</span></h2>
     <p class="muted">
-      I'm open to backend and AI roles. Email is the fastest way to reach me.
+      I'm open to AI, automation and backend roles. The button below opens an email to me — or just copy the address.
     </p>
-    <a class="btn btn-primary" href="mailto:kshahar1315@gmail.com">kshahar1315@gmail.com</a>
+    <div class="contact-actions">
+      <a class="btn btn-primary" href="mailto:kshahar1315@gmail.com">✉ Email me: kshahar1315@gmail.com</a>
+      <a class="btn btn-ghost" href="/Shahar-Kozniak-CV.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+    </div>
   </section>
 </Base>
 
 <script>
-  const words = ['backend platforms', 'AI agents', 'IoT systems', 'automation at scale'];
+  const words = ['AI agents', 'smart automations', 'backend platforms', 'internal tools'];
   const el = document.getElementById('rotator-word');
   if (el && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let i = 0;
@@ -99,7 +102,7 @@ const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || 
     grid-template-columns: 1fr;
     align-items: center;
     gap: var(--space-2xl);
-    min-height: 66dvh;
+    min-height: 56dvh;
   }
 
   @media (min-width: 920px) {
@@ -159,6 +162,12 @@ const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || 
     gap: var(--space-lg);
   }
 
+  @media (min-width: 68rem) {
+    .card-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
   .contact-cta {
     display: flex;
     flex-direction: column;
@@ -169,6 +178,12 @@ const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || 
 
   .contact-cta h2 {
     font-size: var(--text-title);
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
   }
 
   .cta-index {

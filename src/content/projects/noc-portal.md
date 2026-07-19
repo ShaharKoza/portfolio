@@ -8,6 +8,8 @@ order: 4
 stat: 'one search box, zero frameworks'
 ---
 
+_Internal tool: runs inside the team network, code is private._
+
 An internal portal I built for a network operations team. NOC knowledge
 tends to live in ten places at once: who's on shift, what an alert means,
 how to troubleshoot it, who to call at 3 AM. The portal puts all of it

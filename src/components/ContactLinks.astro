@@ -1,13 +1,17 @@
 ---
-// Add GitHub / LinkedIn here once the user provides the URLs.
-const links = [{ href: 'mailto:kshahar1315@gmail.com', label: 'Email' }];
+const links = [
+  { href: 'https://github.com/ShaharKoza', label: 'GitHub ↗', external: true },
+  { href: 'https://www.linkedin.com/in/shahar-kozniak', label: 'LinkedIn ↗', external: true },
+  { href: 'mailto:kshahar1315@gmail.com', label: '✉ kshahar1315@gmail.com', external: false },
+  { href: '/Shahar-Kozniak-CV.pdf', label: 'Download CV (PDF)', external: true },
+];
 ---
 
 <ul class="contact-links">
   {
     links.map((link) => (
       <li>
-        <a href={link.href}>{link.label}</a>
+        <a href={link.href} target={link.external ? "_blank" : undefined} rel={link.external ? "noopener" : undefined}>{link.label}</a>
       </li>
     ))
   }

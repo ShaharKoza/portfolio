@@ -8,6 +8,8 @@ order: 1
 stat: '48 checks, zero manual effort'
 ---
 
+_Client project: the codebase is private._
+
 A production backend that automates security audits of Windows servers.
 A read-only collector gathers the state of every host, an audit engine
 scores it against a catalog of 48 checks, and operators get findings,
