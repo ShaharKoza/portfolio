@@ -1,5 +1,6 @@
 ---
-// Editorial index row (replaced the boxed card).
+// Editorial three-column work row, per the design reference:
+// [year | title | description + stack], hover shifts inward and warms to accent.
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -10,87 +11,75 @@ const { project } = Astro.props;
 const { title, summary, year, tags } = project.data;
 ---
 
-<article class="row">
-  <a href={`/projects/${project.id}/`} class="row-link">
-    <span class="year">{year}</span>
-    <span class="body">
-      <span class="title">{title}</span>
-      <span class="summary muted">{summary}</span>
-      {tags.length > 0 && <span class="tech muted">{tags.join(' · ')}</span>}
-    </span>
-    <span class="arrow" aria-hidden="true">→</span>
-  </a>
-</article>
+<a href={`/projects/${project.id}/`} class="row">
+  <span class="year">{year}</span>
+  <span class="title">{title}</span>
+  <span class="detail">
+    <span class="desc">{summary}</span>
+    {tags.length > 0 && <span class="stack">{tags.join(' · ')}</span>}
+  </span>
+</a>
 
 <style>
   .row {
-    border-top: 1px solid var(--line);
-  }
-
-  .row:last-child {
-    border-bottom: 1px solid var(--line);
-  }
-
-  .row-link {
     display: grid;
-    grid-template-columns: 5.5rem 1fr auto;
+    grid-template-columns: 96px 1fr 360px;
+    gap: 32px;
     align-items: baseline;
-    column-gap: var(--space-lg);
-    padding-block: var(--space-lg);
+    padding-block: 24px;
+    border-top: 1px solid var(--line-soft);
+    transition: color var(--transition), padding-inline-start 250ms ease;
+  }
+
+  .row:last-of-type {
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .row:hover {
+    color: var(--accent);
+    padding-inline-start: 10px;
   }
 
   .year {
     font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    color: var(--ink-soft);
-  }
-
-  .body {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2xs);
+    font-size: var(--text-micro);
+    color: var(--ink-55);
   }
 
   .title {
-    font-weight: 600;
-    font-size: var(--text-lg);
-    line-height: 1.25;
-    transition: color var(--transition);
+    font-size: var(--text-row);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
   }
 
-  .row-link:hover .title {
-    color: var(--accent);
+  .detail {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
-  .summary {
-    font-size: var(--text-base);
-    max-width: 52ch;
+  .desc {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-65);
   }
 
-  .tech {
+  .stack {
     font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    margin-top: var(--space-2xs);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-55);
   }
 
-  .arrow {
-    color: var(--ink-soft);
-    transition: transform var(--transition), color var(--transition);
-  }
-
-  .row-link:hover .arrow {
-    color: var(--accent);
-    transform: translateX(4px);
-  }
-
-  @media (max-width: 640px) {
-    .row-link {
-      grid-template-columns: 1fr auto;
+  @media (max-width: 860px) {
+    .row {
+      grid-template-columns: 1fr;
+      gap: 8px;
     }
 
-    .year {
-      grid-column: 1 / -1;
-      margin-bottom: var(--space-2xs);
+    .row:hover {
+      padding-inline-start: 0;
     }
   }
 </style>

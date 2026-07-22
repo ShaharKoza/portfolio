@@ -1,98 +1,80 @@
 ---
-// Static, grouped skills list. Replaced the animated marquee ticker:
-// grouping communicates competence better than motion.
+// "Practice" grid: four mono-labelled columns, per the design reference.
 const groups = [
   {
-    label: 'AI & Automation',
+    name: 'AI & Automation',
     items: ['AI Agents', 'LLM Orchestration', 'Claude & GPT APIs', 'Automation Pipelines'],
   },
   {
-    label: 'Languages & Back-End',
+    name: 'Languages & Back-End',
     items: ['Python', 'TypeScript', 'Node.js', 'Express', 'PowerShell', 'REST APIs'],
   },
   {
-    label: 'Data & Infra',
-    items: ['PostgreSQL', 'Prisma', 'Firebase', 'Docker', 'Automated Testing'],
+    name: 'Data & Infra',
+    items: ['PostgreSQL', 'Prisma', 'Docker', 'Windows Infrastructure', 'Security & RBAC'],
   },
   {
-    label: 'Hardware & Web',
-    items: ['Raspberry Pi', 'IoT & Sensors', 'Astro', 'Vanilla JS'],
+    name: 'Hardware & Web',
+    items: ['Raspberry Pi', 'IoT & Sensors', 'Astro', 'Vanilla JS', 'Automated Testing'],
   },
 ];
 ---
 
-<dl class="skills">
+<div class="practice">
   {
     groups.map((group) => (
-      <div class="skills-row">
-        <dt>{group.label}</dt>
-        <dd>
-          <ul aria-label={group.label}>
-            {group.items.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        </dd>
+      <div class="group">
+        <h3>{group.name}</h3>
+        <ul>
+          {group.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
       </div>
     ))
   }
-</dl>
+</div>
 
 <style>
-  .skills {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-  }
-
-  .skills-row {
+  .practice {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xs) var(--space-xl);
-    padding-block: var(--space-md);
-    border-top: 1px solid var(--line);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 36px;
   }
 
-  .skills-row:last-child {
-    border-bottom: 1px solid var(--line);
-  }
-
-  @media (min-width: 720px) {
-    .skills-row {
-      grid-template-columns: 14rem 1fr;
-      align-items: baseline;
-    }
-  }
-
-  dt {
+  h3 {
+    margin: 0 0 14px;
     font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    letter-spacing: 0.08em;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-
-  dd {
-    margin: 0;
+    color: var(--ink-55);
   }
 
   ul {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs) var(--space-md);
-    list-style: none;
-    padding: 0;
+    flex-direction: column;
+    gap: 8px;
     margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
   li {
-    font-size: var(--text-base);
-    color: var(--ink);
+    font-size: var(--text-meta);
+    color: var(--ink-85);
   }
 
-  li + li::before {
-    content: '·';
-    color: var(--ink-soft);
-    margin-inline-end: var(--space-md);
+  @media (max-width: 900px) {
+    .practice {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .practice {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

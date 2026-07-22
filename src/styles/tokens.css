@@ -1,33 +1,31 @@
-/* Design tokens. Warm white-brown, delicate, typography-led. Single source of truth. */
+/* Design tokens. Warm paper, coffee ink, single deep-brown accent. Underline links, no buttons. */
 
 :root {
   /* Color */
-  --bg: #f4efe4;
-  --bg-2: #ebe4d5;
-  --surface: rgba(43, 33, 24, 0.03);
-  --surface-2: rgba(43, 33, 24, 0.06);
-  --line: #ddd4c1;
-  --ink: #2b2118;
-  --ink-soft: #6f6656;
-
-  --accent: #7a5a3a;
-  --accent-dim: rgba(122, 90, 58, 0.35);
-  --ok: #3e7d4a;
+  --bg: #faf7f2;
+  --ink: #26201a;
+  --accent: #6b4423;
+  --line: rgba(38, 32, 26, 0.14);
+  --line-soft: rgba(38, 32, 26, 0.12);
+  --ink-85: rgba(38, 32, 26, 0.85);
+  --ink-70: rgba(38, 32, 26, 0.7);
+  --ink-65: rgba(38, 32, 26, 0.65);
+  --ink-55: rgba(38, 32, 26, 0.55);
+  --ink-45: rgba(38, 32, 26, 0.45);
 
   color-scheme: light;
 
   /* Typography */
-  --font-display: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
-  --text-sm: 0.875rem;
-  --text-base: 1.0625rem;
-  --text-md: 1.125rem;
-  --text-lg: clamp(1.25rem, 1.1rem + 0.75vw, 1.6rem);
-  --text-xl: clamp(1.7rem, 1.35rem + 1.75vw, 2.4rem);
-  --text-title: clamp(2rem, 1.5rem + 2.5vw, 3.2rem);
-  --text-hero: clamp(2.6rem, 1.8rem + 4vw, 4.6rem);
+  --text-micro: 0.6875rem;      /* 11px mono labels */
+  --text-meta: 0.84375rem;      /* 13.5px */
+  --text-body: 0.90625rem;      /* 14.5px */
+  --text-md: 1.0625rem;         /* 17px */
+  --text-row: 1.3125rem;        /* 21px project titles */
+  --text-title: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+  --text-hero: clamp(2.375rem, 1.6rem + 3.2vw, 3.625rem);
 
   /* Spacing */
   --space-2xs: 0.25rem;
@@ -36,16 +34,21 @@
   --space-md: 1rem;
   --space-lg: 1.5rem;
   --space-xl: 2.5rem;
-  --space-2xl: 3rem;
-  --space-3xl: clamp(3.25rem, 2.25rem + 3.5vw, 5rem);
+  --space-2xl: 3.5rem;
+  --space-3xl: clamp(4rem, 3rem + 3vw, 5.25rem);
 
   /* Layout */
-  --width-content: 1020px;
+  --width-content: 1120px;
   --width-prose: 68ch;
-  --radius: 4px;
-  --radius-sm: 2px;
+  --pad-x: 48px;
 
   /* Motion */
   --transition: 180ms ease;
-  --transition-slow: 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-slow: 700ms ease;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --pad-x: 22px;
+  }
 }

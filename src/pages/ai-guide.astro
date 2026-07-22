@@ -1,0 +1,343 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="AI Guide: The Unknowns Method | Shahar Kozniak"
+  description="A practical guide to working well with Claude and AI models: the unknowns method, eight techniques, and copy-paste prompts. No jargon required."
+>
+  <article class="guide">
+    <!-- HERO -->
+    <header class="container g-hero">
+      <p class="eyebrow">Working with AI, my field guide</p>
+      <h1>
+        How to work well with AI.<br />
+        <span class="faded">The unknowns method: getting the most out of a model before it starts working.</span>
+      </h1>
+      <p class="g-intro">
+        The gap between what is in your head and what you actually wrote is
+        where things go wrong. Today's models are smart enough; the real skill
+        is noticing what you never said. That skill can be learned, and this
+        page is all of it.
+      </p>
+    </header>
+
+    <!-- QUADRANTS -->
+    <section class="band">
+      <div class="container g-pad">
+        <div class="section-head">
+          <h2>The Four Quadrants</h2>
+          <span class="section-num">01</span>
+        </div>
+        <p class="g-lede">
+          Everything about your task falls into one of four quadrants. Picture
+          a kitchen renovation:
+        </p>
+        <div class="quad-grid">
+          <div class="quad">
+            <h3>Known knowns</h3>
+            <p class="q-sub">What you said out loud</p>
+            <p>Things you want and actually said. "A white kitchen with gray countertops": it is written in the request, the model knows it.</p>
+          </div>
+          <div class="quad">
+            <h3>Known unknowns</h3>
+            <p class="q-sub">Open questions you are aware of</p>
+            <p>Decisions you have not made yet, but at least you know they are waiting. "Built-in oven or freestanding?"</p>
+          </div>
+          <div class="quad">
+            <h3>Unknown knowns</h3>
+            <p class="q-sub">"I'll know it when I see it"</p>
+            <p>So obvious to you that you never said it. But a drawer that sticks? You will feel it in a second.</p>
+          </div>
+          <div class="quad danger">
+            <h3>Unknown unknowns</h3>
+            <p class="q-sub">The most dangerous quadrant</p>
+            <p>Things you do not even know exist, so you cannot ask about them. They surface late, and late is expensive.</p>
+          </div>
+        </div>
+        <p class="g-note">
+          The best users are not the ones who know everything. They are the
+          ones with few unknowns who assume there are always more, and hunt
+          them down systematically before they blow up.
+        </p>
+      </div>
+    </section>
+
+    <!-- STAGE A -->
+    <section class="band">
+      <div class="container g-pad">
+        <div class="section-head">
+          <h2>Stage A, before the work</h2>
+          <span class="section-num">02</span>
+        </div>
+        <p class="g-lede">Five techniques that save hours of rework. This is where most of the magic happens.</p>
+
+        <div class="tech">
+          <h3><span class="t-num">1</span>Blind Spot Pass</h3>
+          <p>Entering a domain you know nothing about? Instead of guessing, say the truth: "I don't understand this. Tell me what I don't know." Say who you are and what you already know, and use the exact phrases "blindspot pass" and "unknown unknowns"; the model understands them well.</p>
+          <blockquote>"I'm working on something new and I know nothing about how this domain works. Give me a blindspot pass: help me identify my unknown unknowns, and help me phrase a better request."</blockquote>
+        </div>
+
+        <div class="tech">
+          <h3><span class="t-num">2</span>See it before you build it</h3>
+          <p>"Beautiful and clean" cannot be explained in words, but it is easy to recognize by eye. Ask for a sketch before the real thing, ideally several directions at once. Golden tip: ask to see plans and sketches as an HTML page instead of a long wall of text.</p>
+          <blockquote>"Build me one HTML page with four completely different design directions, and I'll tell you what I like about each."</blockquote>
+        </div>
+
+        <div class="tech">
+          <h3><span class="t-num">3</span>Let it interview you</h3>
+          <p>You do not know what you forgot to say, so flip the direction and let the model ask. Around three rounds for a normal task. If you adopt only one technique from this page, make it this one.</p>
+          <blockquote>"Before you start, interview me: one question at a time, about anything unclear. Start with the questions whose answers would change the direction most."</blockquote>
+        </div>
+
+        <div class="tech">
+          <h3><span class="t-num">4</span>Bring a reference</h3>
+          <p>When words fail, show. A screenshot of a site you love, a document structured the way you like, a past result that worked. For the technical: the best reference is source code. Point at it and say "make one like this".</p>
+          <blockquote>"Attached is an example of what I want. Look at it and build mine in the same style."</blockquote>
+        </div>
+
+        <div class="tech">
+          <h3><span class="t-num">5</span>A work plan, but a smart one</h3>
+          <p>Without guidance, a plan mixes the decisions you care about with technical details that mean nothing to you. Tell the model how to sort it: what you might change goes on top, the bolts go at the bottom.</p>
+          <blockquote>"Prepare a work plan as an HTML page. Open with the decisions I'm most likely to change: user experience, design, behavior. Put the internal technical details at the end; on those, I trust you."</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE B -->
+    <section class="band">
+      <div class="container g-pad">
+        <div class="section-head">
+          <h2>Stage B, during the work</h2>
+          <span class="section-num">03</span>
+        </div>
+        <p class="g-lede">
+          Done planning? Open a brand-new conversation and attach only the
+          approved plan and sketch. Then: one technique that prevents surprises.
+        </p>
+        <div class="tech">
+          <h3>Implementation notes</h3>
+          <p>Surprises always come up mid-work, and the model decides on its own what to do with them. A work journal turns every such decision into a record waiting for you: zero surprises, and a ready-made lesson for the next project.</p>
+          <blockquote>"Keep a journal file named implementation-notes.md. If you hit something unexpected that forces you to deviate from the plan, always pick the more cautious option, log it under 'Deviations', and keep working."</blockquote>
+          <p class="g-note">Cost tip: do the thinking with the smart, expensive model. Once the plan is locked, hand execution to a cheaper, faster one. Pay for the expensive brain only when you actually need it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE C -->
+    <section class="band">
+      <div class="container g-pad">
+        <div class="section-head">
+          <h2>Stage C, after the work</h2>
+          <span class="section-num">04</span>
+        </div>
+        <div class="tech">
+          <h3><span class="t-num">1</span>A summary-and-pitch document</h3>
+          <p>Whoever approves your work starts exactly where you started: with unknowns of their own. Give them the result first, then the answers.</p>
+          <blockquote>"Package the sketch, the plan and the notes into one document I can send for approval. Open with a demo of the result, then answer in advance the questions people will probably ask."</blockquote>
+        </div>
+        <div class="tech">
+          <h3><span class="t-num">2</span>A comprehension quiz</h3>
+          <p>After a long run, the model sometimes did more than you registered. The rule: do not approve until you pass a short quiz, with a perfect score.</p>
+          <blockquote>"Prepare a summary report as an HTML page: what changed, why, and how it works now. At the end, add a short quiz about the changes, one I have to pass."</blockquote>
+        </div>
+        <p class="g-note">
+          "AI is making us dumber"? That is entirely up to you. "You did
+          something cool? Now teach me how", and the model turns from a quiet
+          worker into a private tutor.
+        </p>
+      </div>
+    </section>
+
+    <!-- CHEAT SHEET -->
+    <section class="band">
+      <div class="container g-pad">
+        <div class="section-head">
+          <h2>Cheat Sheet</h2>
+          <span class="section-num">05</span>
+        </div>
+        <p class="g-lede">Eight sentences to copy as they are:</p>
+        <div class="cheat">
+          <div class="c-row"><span class="c-when">You don't know the domain</span><span class="c-say">"Give me a blindspot pass and tell me what I don't know I don't know."</span></div>
+          <div class="c-row"><span class="c-when">You want to see before building</span><span class="c-say">"Build one HTML page with several completely different directions, and I'll react."</span></div>
+          <div class="c-row"><span class="c-when">Not sure you said everything</span><span class="c-say">"Interview me, one question at a time, starting with what changes the outcome most."</span></div>
+          <div class="c-row"><span class="c-when">Hard to explain in words</span><span class="c-say">"Here's an example. Look at it and do mine in the same style."</span></div>
+          <div class="c-row"><span class="c-when">Before building starts</span><span class="c-say">"A work plan as an HTML page: my decisions on top, technical details at the end."</span></div>
+          <div class="c-row"><span class="c-when">While the model works</span><span class="c-say">"Keep implementation notes. Any deviation: pick the cautious option, log it, continue."</span></div>
+          <div class="c-row"><span class="c-when">You need someone's approval</span><span class="c-say">"Package everything into one document. Open with a demo, pre-answer the questions."</span></div>
+          <div class="c-row"><span class="c-when">When the work is done</span><span class="c-say">"A summary report ending with a short quiz on me. No approval until I pass."</span></div>
+        </div>
+        <p class="g-credit">
+          Based on a working method shared by an Anthropic engineer, and on
+          Eliron Giny's Hebrew explainer. The gap between what is in your head
+          and what you said is the whole story. What you learn becomes the map
+          for next time.
+        </p>
+      </div>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .g-hero {
+    padding-block: 72px 64px;
+  }
+
+  h1 {
+    font-size: var(--text-title);
+    max-width: 820px;
+    margin-block: 24px 28px;
+  }
+
+  .faded {
+    color: var(--ink-45);
+  }
+
+  .g-intro {
+    max-width: 560px;
+    font-size: var(--text-md);
+    line-height: 1.85;
+    color: var(--ink-70);
+  }
+
+  .g-pad {
+    padding-block: 56px 64px;
+  }
+
+  .g-lede {
+    max-width: 620px;
+    font-size: var(--text-md);
+    line-height: 1.8;
+    color: var(--ink-85);
+    margin-bottom: 32px;
+  }
+
+  .quad-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .quad {
+    padding: 24px 0 28px;
+    border-bottom: 1px solid var(--line-soft);
+    padding-inline-end: 36px;
+  }
+
+  .quad h3 {
+    font-size: var(--text-md);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .quad.danger h3 {
+    color: var(--accent);
+  }
+
+  .q-sub {
+    font-size: 12px;
+    color: var(--ink-55);
+    margin-bottom: 10px;
+  }
+
+  .quad p:last-child {
+    font-size: var(--text-meta);
+    line-height: 1.7;
+    color: var(--ink-65);
+  }
+
+  .g-note {
+    max-width: 620px;
+    margin-top: 28px;
+    padding-inline-start: 16px;
+    border-inline-start: 2px solid var(--accent);
+    font-size: var(--text-meta);
+    line-height: 1.75;
+    color: var(--ink-70);
+  }
+
+  .tech {
+    padding-block: 26px;
+    border-top: 1px solid var(--line-soft);
+    max-width: 720px;
+  }
+
+  .tech h3 {
+    font-size: var(--text-md);
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .t-num {
+    font-family: var(--font-mono);
+    font-size: var(--text-micro);
+    color: var(--ink-45);
+  }
+
+  .tech > p {
+    font-size: var(--text-meta);
+    line-height: 1.75;
+    color: var(--ink-70);
+    margin-bottom: 14px;
+  }
+
+  .tech blockquote {
+    margin: 0;
+    padding: 14px 18px;
+    background: rgba(38, 32, 26, 0.04);
+    border-inline-start: 2px solid var(--accent);
+    font-size: var(--text-meta);
+    line-height: 1.75;
+    color: var(--ink);
+  }
+
+  .cheat {
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .c-row {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 24px;
+    padding-block: 14px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .c-when {
+    font-size: var(--text-meta);
+    font-weight: 500;
+  }
+
+  .c-say {
+    font-size: var(--text-meta);
+    line-height: 1.7;
+    color: var(--ink-65);
+  }
+
+  .g-credit {
+    margin-top: 36px;
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: var(--ink-55);
+    max-width: 620px;
+  }
+
+  @media (max-width: 720px) {
+    .quad-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .quad {
+      padding-inline-end: 0;
+    }
+
+    .c-row {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+</style>

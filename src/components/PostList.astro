@@ -47,17 +47,17 @@ const formatDate = (date: Date) =>
       'date summary';
     column-gap: var(--space-lg);
     padding-block: var(--space-lg);
-    border-radius: var(--radius-sm);
+    border-radius: 2px;
     transition: background-color var(--transition);
   }
 
   .post-list a:hover {
-    background: var(--surface);
+    background: rgba(38, 32, 26, 0.04);
   }
 
   time {
     grid-area: date;
-    font-size: var(--text-sm);
+    font-size: var(--text-micro);
     padding-top: 0.2rem;
   }
 
@@ -65,7 +65,7 @@ const formatDate = (date: Date) =>
     grid-area: title;
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: var(--text-lg);
+    font-size: var(--text-row);
     line-height: 1.25;
     transition: color var(--transition);
   }
@@ -76,7 +76,7 @@ const formatDate = (date: Date) =>
 
   .post-summary {
     grid-area: summary;
-    font-size: var(--text-base);
+    font-size: var(--text-meta);
     margin-top: var(--space-2xs);
   }
 
