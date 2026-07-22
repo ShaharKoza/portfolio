@@ -22,14 +22,14 @@ const formatted = date.toLocaleDateString('en-US', {
 <Base title={`${title} | Shahar Kozniak`} description={summary}>
   <article class="post">
     <header class="page-header">
-      <p class="eyebrow" data-reveal>
+      <p class="eyebrow">
         <time datetime={date.toISOString().slice(0, 10)}>{formatted}</time>
         {draft && <span class="draft-badge">Draft</span>}
       </p>
-      <h1 data-reveal style="--reveal-delay: 80ms">{title}</h1>
+      <h1>{title}</h1>
     </header>
 
-    <div class="prose" data-reveal>
+    <div class="prose">
       <Content />
     </div>
 
@@ -52,8 +52,8 @@ const formatted = date.toLocaleDateString('en-US', {
 
   .draft-badge {
     margin-inline-start: var(--space-sm);
-    color: var(--pink);
-    border: 1px solid var(--pink);
+    color: var(--accent);
+    border: 1px solid var(--accent-dim);
     border-radius: 999px;
     padding: 0.05rem 0.6rem;
   }
@@ -68,6 +68,6 @@ const formatted = date.toLocaleDateString('en-US', {
   }
 
   .back a:hover {
-    color: var(--cyan);
+    color: var(--accent);
   }
 </style>

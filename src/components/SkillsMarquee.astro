@@ -1,108 +1,98 @@
 ---
-const rowA = [
-  'AI Agents',
-  'LLM Orchestration',
-  'Claude & GPT APIs',
-  'Python',
-  'TypeScript',
-  'Node.js',
-  'PowerShell',
-  'Automation Pipelines',
-  'PostgreSQL',
-  'Docker',
-];
-
-const rowB = [
-  'Express',
-  'Prisma',
-  'Windows Infrastructure',
-  'Security & RBAC',
-  'Automated Testing',
-  'Raspberry Pi',
-  'IoT & Sensors',
-  'Vanilla JS',
-  'Astro',
-  'REST APIs',
+// Static, grouped skills list. Replaced the animated marquee ticker:
+// grouping communicates competence better than motion.
+const groups = [
+  {
+    label: 'AI & Automation',
+    items: ['AI Agents', 'LLM Orchestration', 'Claude & GPT APIs', 'Automation Pipelines'],
+  },
+  {
+    label: 'Languages & Back-End',
+    items: ['Python', 'TypeScript', 'Node.js', 'Express', 'PowerShell', 'REST APIs'],
+  },
+  {
+    label: 'Data & Infra',
+    items: ['PostgreSQL', 'Prisma', 'Firebase', 'Docker', 'Automated Testing'],
+  },
+  {
+    label: 'Hardware & Web',
+    items: ['Raspberry Pi', 'IoT & Sensors', 'Astro', 'Vanilla JS'],
+  },
 ];
 ---
 
-<div class="marquee-wrap" data-reveal>
+<dl class="skills">
   {
-    [rowA, rowB].map((row, i) => (
-      <div class={`marquee ${i === 1 ? 'reverse' : ''}`}>
-        <ul class="track" aria-hidden={i === 1 ? undefined : undefined}>
-          {[...row, ...row].map((skill, j) => (
-            <li aria-hidden={j >= row.length ? 'true' : undefined}>{skill}</li>
-          ))}
-        </ul>
+    groups.map((group) => (
+      <div class="skills-row">
+        <dt>{group.label}</dt>
+        <dd>
+          <ul aria-label={group.label}>
+            {group.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </dd>
       </div>
     ))
   }
-</div>
+</dl>
 
 <style>
-  .marquee-wrap {
+  .skills {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    margin: 0;
   }
 
-  .marquee {
-    overflow: hidden;
-    mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+  .skills-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xs) var(--space-xl);
+    padding-block: var(--space-md);
+    border-top: 1px solid var(--line);
   }
 
-  .track {
+  .skills-row:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  @media (min-width: 720px) {
+    .skills-row {
+      grid-template-columns: 14rem 1fr;
+      align-items: baseline;
+    }
+  }
+
+  dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  ul {
     display: flex;
-    gap: var(--space-md);
-    width: max-content;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-md);
     list-style: none;
     padding: 0;
-    animation: scroll 36s linear infinite;
+    margin: 0;
   }
 
-  .reverse .track {
-    animation-direction: reverse;
-  }
-
-  .marquee:hover .track {
-    animation-play-state: paused;
-  }
-
-  .track li {
-    font-family: var(--font-display);
+  li {
     font-size: var(--text-base);
-    font-weight: 500;
-    color: var(--ink-soft);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 0.45rem 1.2rem;
-    white-space: nowrap;
-    transition: color var(--transition), border-color var(--transition), box-shadow var(--transition);
-  }
-
-  .track li:hover {
     color: var(--ink);
-    border-color: rgba(34, 211, 238, 0.5);
-    box-shadow: 0 0 18px var(--glow-cyan);
   }
 
-  @keyframes scroll {
-    to {
-      transform: translateX(calc(-50% - var(--space-md) / 2));
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .track {
-      animation: none;
-      flex-wrap: wrap;
-      width: auto;
-    }
-
-    .marquee {
-      mask-image: none;
-    }
+  li + li::before {
+    content: '·';
+    color: var(--ink-soft);
+    margin-inline-end: var(--space-md);
   }
 </style>

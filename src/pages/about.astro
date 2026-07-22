@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import ContactLinks from '../components/ContactLinks.astro';
+import SkillsMarquee from '../components/SkillsMarquee.astro';
 // Copy pending final review with Shahar before deploy.
 ---
 
@@ -9,13 +10,13 @@ import ContactLinks from '../components/ContactLinks.astro';
   description="Who Shahar Kozniak is, how he works, and what he's focused on."
 >
   <header class="page-header">
-    <p class="eyebrow" data-reveal>Profile</p>
-    <h1 data-reveal style="--reveal-delay: 80ms">
+    <p class="eyebrow">Profile</p>
+    <h1>
       About <span class="gradient-text">me</span>
     </h1>
   </header>
 
-  <div class="prose" data-reveal>
+  <div class="prose">
     <p>
       I'm Shahar Kozniak, an AI and automation developer. My work sits where
       software meets manual labor: I look for the processes that eat
@@ -47,15 +48,23 @@ import ContactLinks from '../components/ContactLinks.astro';
       </li>
     </ul>
 
+    <h2>Toolbox</h2>
+  </div>
+
+  <div class="skills-block">
+    <SkillsMarquee />
+  </div>
+
+  <div class="prose">
     <h2>Get in touch</h2>
     <p>
-      The fastest way to reach me is email — the address below opens a new
+      The fastest way to reach me is email: the address below opens a new
       message. If you're hiring for a role where automation, reliability and
       ownership matter, I want to hear about it.
     </p>
   </div>
 
-  <div class="contact" data-reveal>
+  <div class="contact">
     <ContactLinks />
   </div>
 </Base>
@@ -76,5 +85,10 @@ import ContactLinks from '../components/ContactLinks.astro';
     margin-block: var(--space-2xl);
     padding-top: var(--space-xl);
     border-top: 1px solid var(--line);
+  }
+
+  .skills-block {
+    margin-block: var(--space-lg) var(--space-xl);
+    max-width: 52rem;
   }
 </style>

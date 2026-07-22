@@ -4,8 +4,6 @@ import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import PostList from '../components/PostList.astro';
-import SkillsMarquee from '../components/SkillsMarquee.astro';
-import TerminalCard from '../components/TerminalCard.astro';
 
 // Drafts stay visible in dev so they can be previewed, but never ship in a build.
 const showDrafts = import.meta.env.DEV;
@@ -27,73 +25,51 @@ const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || 
 >
   <section class="hero">
     <div class="hero-text">
-      <p class="eyebrow" data-reveal>AI &amp; Automation Developer</p>
-      <h1 data-reveal style="--reveal-delay: 80ms">Shahar Kozniak<span class="gradient-text">.</span></h1>
-      <p class="tagline" data-reveal style="--reveal-delay: 160ms">
-        I build systems that replace manual work:&nbsp;
-        <span class="rotator">
-          <span class="rotator-word gradient-text" id="rotator-word">AI agents</span>
-        </span>
+      <p class="eyebrow">AI &amp; Automation Developer</p>
+      <h1>Shahar Kozniak<span class="gradient-text">.</span></h1>
+      <p class="tagline">
+        I build systems that replace manual work: AI agents, smart
+        automations, and backend platforms.
       </p>
-      <p class="intro muted" data-reveal style="--reveal-delay: 240ms">
+      <p class="intro muted">
         Most recently: a platform that audits Windows server fleets on its
         own, a smart kennel system built on a Raspberry Pi, and internal
         tools that operations teams use every day.
       </p>
-      <div class="cta" data-reveal style="--reveal-delay: 320ms">
+      <p class="status"><span class="status-dot" aria-hidden="true"></span>Open to opportunities</p>
+      <div class="cta">
         <a class="btn btn-primary" href="/projects/">View projects</a>
-        <a class="btn btn-ghost" href="mailto:kshahar1315@gmail.com">✉ Email me</a>
+        <a class="btn btn-ghost" href="mailto:kshahar1315@gmail.com">Email me</a>
       </div>
     </div>
-    <TerminalCard />
   </section>
 
-  <Section eyebrow="Selected work" title="Projects" index="01" moreHref="/projects/">
-    <div class="card-grid">
-      {featured.map((project, i) => <ProjectCard project={project} delay={i * 90} />)}
+  <Section eyebrow="Selected work" title="Projects" moreHref="/projects/">
+    <div class="project-list">
+      {featured.map((project) => <ProjectCard project={project} />)}
     </div>
-  </Section>
-
-  <Section eyebrow="Toolbox" title="Skills" index="02">
-    <SkillsMarquee />
   </Section>
 
   {
     latestPosts.length > 0 && (
-      <Section eyebrow="Notes" title="Writing" index="03" moreHref="/writing/">
+      <Section eyebrow="Notes" title="Writing" moreHref="/writing/">
         <PostList posts={latestPosts} />
       </Section>
     )
   }
 
-  <section class="section contact-cta" data-reveal>
-    <p class="eyebrow"><span class="cta-index gradient-text">04.</span> Contact</p>
+  <section class="section contact-cta">
+    <p class="eyebrow">Contact</p>
     <h2>Get in <span class="gradient-text">touch</span></h2>
     <p class="muted">
-      I'm open to AI, automation and backend roles. The button below opens an email to me — or just copy the address.
+      I'm open to AI, automation and backend roles. The button below opens an email to me, or just copy the address.
     </p>
     <div class="contact-actions">
-      <a class="btn btn-primary" href="mailto:kshahar1315@gmail.com">✉ Email me: kshahar1315@gmail.com</a>
+      <a class="btn btn-primary" href="mailto:kshahar1315@gmail.com">Email me: kshahar1315@gmail.com</a>
       <a class="btn btn-ghost" href="/Shahar-Kozniak-CV.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
     </div>
   </section>
 </Base>
-
-<script>
-  const words = ['AI agents', 'smart automations', 'backend platforms', 'internal tools'];
-  const el = document.getElementById('rotator-word');
-  if (el && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let i = 0;
-    setInterval(() => {
-      el.classList.add('is-swapping');
-      setTimeout(() => {
-        i = (i + 1) % words.length;
-        el.textContent = words[i];
-        el.classList.remove('is-swapping');
-      }, 280);
-    }, 2600);
-  }
-</script>
 
 <style>
   .hero {
@@ -101,14 +77,7 @@ const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || 
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
-    gap: var(--space-2xl);
-    min-height: 56dvh;
-  }
-
-  @media (min-width: 920px) {
-    .hero {
-      grid-template-columns: 1.25fr 0.75fr;
-    }
+    min-height: 48dvh;
   }
 
   .hero-text {
@@ -130,20 +99,6 @@ const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || 
     line-height: 1.25;
   }
 
-  .rotator {
-    display: inline-block;
-  }
-
-  .rotator-word {
-    display: inline-block;
-    transition: opacity 0.28s ease, transform 0.28s ease;
-  }
-
-  .rotator-word.is-swapping {
-    opacity: 0;
-    transform: translateY(0.5em);
-  }
-
   .intro {
     font-size: var(--text-md);
     max-width: 40rem;
@@ -156,16 +111,25 @@ const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || 
     margin-top: var(--space-sm);
   }
 
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    gap: var(--space-lg);
+  .project-list {
+    display: flex;
+    flex-direction: column;
   }
 
-  @media (min-width: 68rem) {
-    .card-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
+  .status {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--ink-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .status-dot {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background: var(--ok);
   }
 
   .contact-cta {
@@ -184,10 +148,5 @@ const latestPosts = (await getCollection('writing', ({ data }) => showDrafts || 
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
-  }
-
-  .cta-index {
-    font-weight: 700;
-    margin-inline-end: 0.2em;
   }
 </style>

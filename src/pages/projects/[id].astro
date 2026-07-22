@@ -16,10 +16,10 @@ const { title, summary, year, tags, links } = project.data;
 <Base title={`${title} | Shahar Kozniak`} description={summary}>
   <article class="project">
     <header class="page-header">
-      <p class="eyebrow" data-reveal>Project · {year}</p>
-      <h1 data-reveal style="--reveal-delay: 80ms">{title}</h1>
-      <p class="muted lede" data-reveal style="--reveal-delay: 160ms">{summary}</p>
-      <ul class="tags" aria-label="Technologies" data-reveal style="--reveal-delay: 220ms">
+      <p class="eyebrow">Project · {year}</p>
+      <h1>{title}</h1>
+      <p class="muted lede">{summary}</p>
+      <ul class="tags" aria-label="Technologies">
         {tags.map((tag) => <li>{tag}</li>)}
       </ul>
       {
@@ -32,7 +32,7 @@ const { title, summary, year, tags, links } = project.data;
       }
     </header>
 
-    <div class="prose" data-reveal>
+    <div class="prose">
       <Content />
     </div>
 
@@ -83,7 +83,7 @@ const { title, summary, year, tags, links } = project.data;
   }
 
   .links a {
-    color: var(--cyan);
+    color: var(--accent);
   }
 
   .back {
@@ -96,6 +96,6 @@ const { title, summary, year, tags, links } = project.data;
   }
 
   .back a:hover {
-    color: var(--cyan);
+    color: var(--accent);
   }
 </style>

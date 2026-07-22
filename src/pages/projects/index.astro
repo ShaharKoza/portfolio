@@ -14,18 +14,18 @@ const projects = (await getCollection('projects', ({ data }) => showDrafts || !d
   description="What Shahar Kozniak has built: automated auditing, AI, IoT, and web systems."
 >
   <header class="page-header">
-    <p class="eyebrow" data-reveal>Selected work</p>
-    <h1 data-reveal style="--reveal-delay: 80ms">
+    <p class="eyebrow">Selected work</p>
+    <h1>
       Things I've <span class="gradient-text">built</span>
     </h1>
-    <p class="muted" data-reveal style="--reveal-delay: 160ms">
+    <p class="muted">
       Real systems solving real problems: what they do and the engineering
       decisions behind them.
     </p>
   </header>
 
-  <div class="card-grid">
-    {projects.map((project, i) => <ProjectCard project={project} delay={i * 90} />)}
+  <div class="project-list">
+    {projects.map((project) => <ProjectCard project={project} />)}
   </div>
 </Base>
 
@@ -42,16 +42,9 @@ const projects = (await getCollection('projects', ({ data }) => showDrafts || !d
     font-size: var(--text-title);
   }
 
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    gap: var(--space-lg);
+  .project-list {
+    display: flex;
+    flex-direction: column;
     padding-bottom: var(--space-2xl);
-  }
-
-  @media (min-width: 68rem) {
-    .card-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
   }
 </style>

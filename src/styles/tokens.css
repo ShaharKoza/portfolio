@@ -1,38 +1,33 @@
-/* Design tokens. Dark, glowing gradient system. Single source of truth. */
+/* Design tokens. Warm white-brown, delicate, typography-led. Single source of truth. */
 
 :root {
   /* Color */
-  --bg: #08070d;
-  --bg-2: #0f0e17;
-  --surface: rgba(255, 255, 255, 0.03);
-  --surface-2: rgba(255, 255, 255, 0.06);
-  --line: rgba(255, 255, 255, 0.09);
-  --ink: #f4f3fa;
-  --ink-soft: #a7a3b8;
+  --bg: #f4efe4;
+  --bg-2: #ebe4d5;
+  --surface: rgba(43, 33, 24, 0.03);
+  --surface-2: rgba(43, 33, 24, 0.06);
+  --line: #ddd4c1;
+  --ink: #2b2118;
+  --ink-soft: #6f6656;
 
-  --violet: #8b5cf6;
-  --cyan: #22d3ee;
-  --pink: #f472b6;
-  --gradient: linear-gradient(100deg, var(--cyan) 0%, var(--violet) 50%, var(--pink) 100%);
+  --accent: #7a5a3a;
+  --accent-dim: rgba(122, 90, 58, 0.35);
+  --ok: #3e7d4a;
 
-  --glow-violet: rgba(139, 92, 246, 0.35);
-  --glow-cyan: rgba(34, 211, 238, 0.25);
-  --glow-pink: rgba(244, 114, 182, 0.25);
-
-  color-scheme: dark;
+  color-scheme: light;
 
   /* Typography */
-  --font-display: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
 
   --text-sm: 0.875rem;
-  --text-base: 1rem;
+  --text-base: 1.0625rem;
   --text-md: 1.125rem;
   --text-lg: clamp(1.25rem, 1.1rem + 0.75vw, 1.6rem);
   --text-xl: clamp(1.7rem, 1.35rem + 1.75vw, 2.4rem);
   --text-title: clamp(2rem, 1.5rem + 2.5vw, 3.2rem);
-  --text-hero: clamp(2.9rem, 1.9rem + 5vw, 5.5rem);
+  --text-hero: clamp(2.6rem, 1.8rem + 4vw, 4.6rem);
 
   /* Spacing */
   --space-2xs: 0.25rem;
@@ -45,10 +40,10 @@
   --space-3xl: clamp(3.25rem, 2.25rem + 3.5vw, 5rem);
 
   /* Layout */
-  --width-content: 1120px;
+  --width-content: 1020px;
   --width-prose: 68ch;
-  --radius: 16px;
-  --radius-sm: 10px;
+  --radius: 4px;
+  --radius-sm: 2px;
 
   /* Motion */
   --transition: 180ms ease;

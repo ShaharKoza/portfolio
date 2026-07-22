@@ -14,16 +14,16 @@ const posts = (await getCollection('writing', ({ data }) => showDrafts || !data.
   description="Notes on software, AI, and working methods by Shahar Kozniak."
 >
   <header class="page-header">
-    <p class="eyebrow" data-reveal>Notes</p>
-    <h1 data-reveal style="--reveal-delay: 80ms">Writing</h1>
-    <p class="muted" data-reveal style="--reveal-delay: 160ms">
+    <p class="eyebrow">Notes</p>
+    <h1>Writing</h1>
+    <p class="muted">
       Occasional notes on software, AI, and how I work.
     </p>
   </header>
 
   {
     posts.length > 0 ? (
-      <div data-reveal>
+      <div>
         <PostList posts={posts} />
       </div>
     ) : (
