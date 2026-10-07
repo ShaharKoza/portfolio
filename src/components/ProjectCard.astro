@@ -8,13 +8,14 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, year, tags } = project.data;
+const { title, summary, year, tags, stat } = project.data;
 ---
 
 <a href={`/projects/${project.id}/`} class="row">
   <span class="year">{year}</span>
   <span class="title">{title}</span>
   <span class="detail">
+    {stat && <span class="stat">{stat}</span>}
     <span class="desc">{summary}</span>
     {tags.length > 0 && <span class="stack">{tags.join(' · ')}</span>}
   </span>
@@ -56,6 +57,13 @@ const { title, summary, year, tags } = project.data;
     display: flex;
     flex-direction: column;
     gap: 8px;
+  }
+
+  .stat {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: var(--accent);
   }
 
   .desc {

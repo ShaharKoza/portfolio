@@ -1,18 +1,21 @@
 ---
-title: 'PuppyCare: Smart Kennel System'
+title: 'PuppyCare: Smart Kennel'
 summary: 'An IoT kennel monitoring system built on a Raspberry Pi with custom sensors, synced in real time to a companion SwiftUI iPhone app.'
 year: 2026
 tags: ['Raspberry Pi', 'IoT', 'Sensors', 'iOS']
 featured: true
 order: 2
 stat: 'from the wire to the iPhone'
+links:
+  - label: iOS app
+    href: https://github.com/ShaharKoza/PuppyCare
+  - label: Pi sensor station
+    href: https://github.com/ShaharKoza/smart-kennel
 ---
 
 A smart kennel for dogs: a Raspberry Pi, a set of sensors (temperature,
 humidity, motion, sound, light, camera), and an iPhone app that shows
 what's happening in real time, with push alerts when something is wrong.
-
-**Code:** [iOS app (PuppyCare)](https://github.com/ShaharKoza/PuppyCare) · [Pi sensor station (smart-kennel)](https://github.com/ShaharKoza/smart-kennel)
 
 Hardware teaches you things backend work never will. A bug here isn't a
 stack trace, it's a sensor acting up or a dog that found the one blind

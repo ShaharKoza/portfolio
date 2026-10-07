@@ -28,18 +28,15 @@ const featured = (
     <div class="hero-row rise" style="animation-delay: 0.3s">
       <p class="intro">
         I find the processes that eat someone's hours every week and replace
-        them with software that runs on its own. Most recently: a platform
-        that audits Windows server fleets by itself, and internal tools that
-        operations teams use every day.
+        them with software that runs on its own. Most recently: automated
+        checks on client servers that push data to a dashboard I developed,
+        and an internal portal NOC teams use to operate faults and shifts.
       </p>
       <div class="hero-links">
         <a class="link" href="#work">View work</a>
-        <a class="link" href="/Shahar-Kozniak-CV.pdf">Curriculum vitae</a>
+        <a class="link" href="/Shahar-Kozniak-CV.pdf">CV</a>
       </div>
     </div>
-    <p class="availability rise" style="animation-delay: 0.45s">
-      <span class="dot" aria-hidden="true"></span>Currently open to AI, automation and backend roles
-    </p>
   </header>
 
   <!-- WORK -->
@@ -73,7 +70,7 @@ const featured = (
         <div class="about-rows">
           <div class="about-row">
             <span class="about-key">Automation that pays for itself</span>
-            <span class="about-val">A platform that turned a multi-day manual server audit into a background job.</span>
+            <span class="about-val">Automated checks on client servers push their data to a web dashboard I developed, replacing a multi-day manual audit.</span>
           </div>
           <div class="about-row">
             <span class="about-key">Working with AI seriously</span>
@@ -81,7 +78,7 @@ const featured = (
           </div>
           <div class="about-row">
             <span class="about-key">Range on purpose</span>
-            <span class="about-val">Backend platforms, IoT hardware, internal tools and customer-facing web. The same discipline across all of them.</span>
+            <span class="about-val">Backend platforms, IoT hardware, and internal tools. The same discipline across all of them.</span>
           </div>
         </div>
       </div>
@@ -89,7 +86,7 @@ const featured = (
   </section>
 
   <!-- SKILLS -->
-  <section id="skills" class="band" data-reveal>
+  <section id="practice" class="band" data-reveal>
     <div class="container section-pad">
       <div class="section-head">
         <h2>Practice</h2>
@@ -107,13 +104,12 @@ const featured = (
         <span class="section-num">04</span>
       </div>
       <p class="contact-lede">
-        Open to AI, automation and backend&nbsp;roles.<br />
         <a class="email" href="mailto:kshahar1315@gmail.com">kshahar1315@gmail.com</a>
       </p>
       <div class="contact-links">
         <a href="https://github.com/ShaharKoza">GitHub</a>
         <a href="https://www.linkedin.com/in/shahar-kozniak">LinkedIn</a>
-        <a href="/Shahar-Kozniak-CV.pdf">CV, PDF</a>
+        <a href="/Shahar-Kozniak-CV.pdf">CV</a>
       </div>
     </div>
   </section>
@@ -156,25 +152,6 @@ const featured = (
   .hero-links {
     display: flex;
     gap: 28px;
-  }
-
-  .availability {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-mono);
-    font-size: var(--text-micro);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-top: 44px;
-  }
-
-  .dot {
-    width: 6px;
-    height: 6px;
-    background: var(--accent);
-    animation: pulseDot 2.4s ease infinite;
   }
 
   .section-pad {

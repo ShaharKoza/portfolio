@@ -1,7 +1,7 @@
 # Shahar Kozniak: Portfolio
 
 Personal site of Shahar Kozniak, AI & Automation Developer: projects, profile,
-and writing. Built with [Astro](https://astro.build), a hand-rolled
+and an AI field guide. Built with [Astro](https://astro.build), a hand-rolled
 design-token system (no CSS framework), self-hosted fonts, and light vanilla
 JS for the animations.
 
@@ -26,20 +26,14 @@ validated at build time (`src/content.config.ts`):
 
 - **Project**: `src/content/projects/<slug>.md` with `title`, `summary`,
   `year`, `tags`, `featured` (shows on the home page), `order`, optional
-  `links.github` / `links.live`, `draft`.
-- **Post**: `src/content/writing/<slug>.md` with `title`, `summary`, `date`,
-  `draft`.
+  `stat`, optional `links` (a list of `{ label, href }`), `draft`.
 
-Entries with `draft: true` render in `npm run dev` (with a Draft badge) but
-are excluded from production builds.
+Entries with `draft: true` render in `npm run dev` but are excluded from
+production builds.
 
 ## Before publishing: TODO
 
-- [ ] Finalize the About page copy together (marked `DRAFT COPY`)
-- [ ] Add GitHub / LinkedIn links in `src/components/ContactLinks.astro`
-      when available
-- [ ] Set the real domain in `astro.config.mjs` (`site`)
-- [ ] Finish or unpublish the draft post in `src/content/writing/`
+- [ ] Decide the final public project list (see `SITE-CHANGES.md`)
 
 ## Writing rules for site copy
 

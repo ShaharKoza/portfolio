@@ -10,7 +10,8 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
-const { title, summary, year, tags, links } = project.data;
+const { title, summary, year, tags } = project.data;
+const links = project.data.links ?? [];
 ---
 
 <Base title={`${title} | Shahar Kozniak`} description={summary}>
@@ -23,10 +24,11 @@ const { title, summary, year, tags, links } = project.data;
         {tags.map((tag) => <li>{tag}</li>)}
       </ul>
       {
-        (links.github || links.live) && (
+        links.length > 0 && (
           <p class="links">
-            {links.github && <a href={links.github}>Source ↗</a>}
-            {links.live && <a href={links.live}>Live ↗</a>}
+            {links.map((link) => (
+              <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label} ↗</a>
+            ))}
           </p>
         )
       }

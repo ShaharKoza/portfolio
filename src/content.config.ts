@@ -12,23 +12,15 @@ const projects = defineCollection({
     order: z.number().default(99),
     stat: z.string().optional(),
     links: z
-      .object({
-        github: z.string().url().optional(),
-        live: z.string().url().optional(),
-      })
-      .default({}),
+      .array(
+        z.object({
+          label: z.string(),
+          href: z.string().url(),
+        })
+      )
+      .default([]),
     draft: z.boolean().default(false),
   }),
 });
 
-const writing = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/writing' }),
-  schema: z.object({
-    title: z.string(),
-    summary: z.string().max(240),
-    date: z.coerce.date(),
-    draft: z.boolean().default(false),
-  }),
-});
-
-export const collections = { projects, writing };
+export const collections = { projects };
