@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SkillsMarquee from '../components/SkillsMarquee.astro';
+import { PortfolioHero } from '../components/hero/PortfolioHero';
 
 // Drafts stay visible in dev so they can be previewed, but never ship in a build.
 const showDrafts = import.meta.env.DEV;
@@ -16,83 +17,54 @@ const featured = (
 
 <Base
   title="Shahar Kozniak | AI & Automation Developer"
-  description="Shahar Kozniak builds systems that replace manual work: AI agents, smart automations, and backend platforms."
+  description="Computer Science graduate building practical AI and automation systems: LLM agents, n8n workflows, and Python integrations."
+  hideHeader
 >
-  <!-- HERO -->
-  <header id="top" class="container hero">
-    <p class="eyebrow rise" style="animation-delay: 0.05s">AI &amp; Automation Developer</p>
-    <h1 class="rise" style="animation-delay: 0.15s">
-      Systems that replace manual work.<br />
-      <span class="faded">AI agents, smart automations, and backend platforms.</span>
-    </h1>
-    <div class="hero-row rise" style="animation-delay: 0.3s">
-      <p class="intro">
-        I find the processes that eat someone's hours every week and replace
-        them with software that runs on its own. Most recently: automated
-        checks on client servers that push data to a dashboard I developed,
-        and an internal portal NOC teams use to operate faults and shifts.
-      </p>
-      <div class="hero-links">
-        <a class="link" href="#work">View work</a>
-        <a class="link" href="/Shahar-Kozniak-CV.pdf">CV</a>
-      </div>
-    </div>
-  </header>
+  <PortfolioHero client:load />
 
   <!-- WORK -->
   <section id="work" class="band" data-reveal>
-    <div class="container section-pad">
+    <div class="container section-pad work-pad">
       <div class="section-head">
         <h2>Selected Work</h2>
         <span class="section-num">01</span>
       </div>
-      <div class="work-list">
-        {featured.map((project) => <ProjectCard project={project} />)}
+      <div class="work-list work-spread">
+        {featured.map((project, i) => <ProjectCard project={project} index={i + 1} />)}
       </div>
       <a class="link all-link" href="/projects/">All projects</a>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="band" data-reveal>
+  <section id="experience" class="band" data-reveal>
     <div class="container section-pad about-grid">
       <div class="section-head about-head">
-        <h2>About</h2>
+        <h2>Experience</h2>
         <span class="section-num">02</span>
       </div>
       <div>
-        <p class="about-lede">
-          I plan before I build. Unknowns get mapped first and resolved in
-          order of risk, decisions run on data rather than gut feeling, and I
-          hold a high bar for what leaves my hands. I would rather ship fewer
-          things that hold up than many things that almost do.
-        </p>
         <div class="about-rows">
           <div class="about-row">
-            <span class="about-key">Automation that pays for itself</span>
-            <span class="about-val">Automated checks on client servers push their data to a web dashboard I developed, replacing a multi-day manual audit.</span>
+            <span class="about-key">AI &amp; Automation Developer</span>
+            <span class="about-val">High Networks Ltd (2025–Present)</span>
           </div>
           <div class="about-row">
-            <span class="about-key">Working with AI seriously</span>
-            <span class="about-val">Agents and AI tooling are part of how I build now, and I invest in getting better at them constantly.</span>
+            <span class="about-key">NOC Engineer</span>
+            <span class="about-val">Tevel Metro (2026–Present)</span>
           </div>
           <div class="about-row">
-            <span class="about-key">Range on purpose</span>
-            <span class="about-val">Backend platforms, IoT hardware, and internal tools. The same discipline across all of them.</span>
+            <span class="about-key">IT Support Technician</span>
+            <span class="about-val">Priority Software (2024–2025)</span>
+          </div>
+        </div>
+        <p class="eyebrow edu-label">Education</p>
+        <div class="about-rows">
+          <div class="about-row">
+            <span class="about-key">B.Sc. in Computer Science</span>
+            <span class="about-val">Ono Academic College (Graduated 2026)</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="practice" class="band" data-reveal>
-    <div class="container section-pad">
-      <div class="section-head">
-        <h2>Practice</h2>
-        <span class="section-num">03</span>
-      </div>
-      <SkillsMarquee />
     </div>
   </section>
 
@@ -101,10 +73,10 @@ const featured = (
     <div class="container contact-pad">
       <div class="section-head">
         <h2>Contact</h2>
-        <span class="section-num">04</span>
+        <span class="section-num">03</span>
       </div>
       <p class="contact-lede">
-        <a class="email" href="mailto:kshahar1315@gmail.com">kshahar1315@gmail.com</a>
+        <a class="email" href="mailto:shaharkozniak@gmail.com">shaharkozniak@gmail.com</a>
       </p>
       <div class="contact-links">
         <a href="https://github.com/ShaharKoza">GitHub</a>
@@ -113,54 +85,26 @@ const featured = (
       </div>
     </div>
   </section>
+
+  <!-- SKILLS -->
+  <section id="practice" class="band" data-reveal>
+    <div class="container section-pad practice-pad">
+      <div class="section-head">
+        <h2>Practice</h2>
+        <span class="section-num">04</span>
+      </div>
+      <SkillsMarquee />
+    </div>
+  </section>
 </Base>
 
 <style>
-  .hero {
-    padding-block: 84px 76px;
-  }
-
-  .rise {
-    animation: riseIn 0.7s ease both;
-  }
-
-  h1 {
-    font-size: var(--text-hero);
-    max-width: 820px;
-    margin-block: 24px 32px;
-  }
-
-  .faded {
-    color: var(--ink-45);
-  }
-
-  .hero-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 32px;
-  }
-
-  .intro {
-    max-width: 440px;
-    font-size: var(--text-body);
-    line-height: 1.75;
-    color: var(--ink-70);
-  }
-
-  .hero-links {
-    display: flex;
-    gap: 28px;
-  }
-
   .section-pad {
     padding-block: 56px 64px;
   }
 
-  .work-list {
-    display: flex;
-    flex-direction: column;
+  .work-pad {
+    padding-top: 28px;
   }
 
   .all-link {
@@ -178,11 +122,9 @@ const featured = (
     margin-bottom: 0;
   }
 
-  .about-lede {
-    font-size: var(--text-md);
-    line-height: 1.75;
-    margin-bottom: 28px;
-    color: var(--ink-85);
+  .edu-label {
+    margin-top: 36px;
+    margin-bottom: 8px;
   }
 
   .about-rows {
@@ -210,7 +152,11 @@ const featured = (
   }
 
   .contact-pad {
-    padding-block: 72px 80px;
+    padding-block: 56px 48px;
+  }
+
+  .practice-pad {
+    padding-bottom: 80px;
   }
 
   .contact-lede {
@@ -224,7 +170,7 @@ const featured = (
 
   .email {
     color: var(--accent);
-    border-bottom: 1px solid rgba(107, 68, 35, 0.4);
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
     padding-bottom: 2px;
   }
 
@@ -238,7 +184,7 @@ const featured = (
   }
 
   .contact-links a {
-    border-bottom: 1px solid rgba(38, 32, 26, 0.3);
+    border-bottom: 1px solid var(--line);
     padding-bottom: 2px;
   }
 
@@ -247,10 +193,6 @@ const featured = (
   }
 
   @media (max-width: 860px) {
-    .hero {
-      padding-block: 56px 48px;
-    }
-
     .about-grid {
       grid-template-columns: 1fr;
       gap: 28px;

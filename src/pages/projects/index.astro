@@ -11,8 +11,9 @@ const projects = (await getCollection('projects', ({ data }) => showDrafts || !d
 
 <Base
   title="Projects | Shahar Kozniak"
-  description="What Shahar Kozniak has built: automated auditing, AI, IoT, and web systems."
+  description="Hermes, the NOC operations portal, PuppyCare, and server audit automation."
 >
+  <div class="container">
   <header class="page-header">
     <p class="eyebrow">Selected work</p>
     <h1>
@@ -24,8 +25,9 @@ const projects = (await getCollection('projects', ({ data }) => showDrafts || !d
     </p>
   </header>
 
-  <div class="project-list">
-    {projects.map((project) => <ProjectCard project={project} />)}
+  <div class="project-list work-spread">
+    {projects.map((project, i) => <ProjectCard project={project} index={i + 1} />)}
+  </div>
   </div>
 </Base>
 
@@ -43,8 +45,6 @@ const projects = (await getCollection('projects', ({ data }) => showDrafts || !d
   }
 
   .project-list {
-    display: flex;
-    flex-direction: column;
     padding-bottom: var(--space-2xl);
   }
 </style>

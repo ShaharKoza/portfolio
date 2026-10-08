@@ -1,0 +1,106 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme) source(none);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@source "../components/hero/**/*.tsx";
+@source "../components/ui/**/*.tsx";
+
+/* Unlayered so these beat the site-wide element styles. */
+#portfolio-hero {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+#portfolio-hero h1 {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(3.5rem, 14vw, 9.5rem);
+  line-height: 0.78;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  text-wrap: nowrap;
+}
+
+#portfolio-hero .hero-accent {
+  color: var(--accent);
+}
+
+#portfolio-hero .hero-intro {
+  max-width: 50rem;
+  margin: 1.25rem 0 0;
+  font-size: var(--text-md);
+  line-height: 1.7;
+  color: var(--ink-70);
+  text-wrap: pretty;
+}
+
+#portfolio-hero .hero-intro span {
+  display: block;
+}
+
+#portfolio-hero button {
+  background: none;
+  border: 0;
+  color: inherit;
+  padding: 0;
+  cursor: pointer;
+}
+
+#portfolio-hero .hero-bar {
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  transition: background-color var(--transition), border-color var(--transition);
+  backdrop-filter: blur(10px);
+}
+
+#portfolio-hero a.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.7rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+#portfolio-hero a.hero-btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+#portfolio-hero a.hero-btn-primary:hover {
+  color: var(--on-accent);
+  opacity: 0.9;
+}
+
+#portfolio-hero a.hero-btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+#portfolio-hero a.hero-btn-outline:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+#portfolio-hero a.hero-icon {
+  color: var(--ink);
+}
+
+#portfolio-hero a.hero-icon:hover {
+  color: var(--accent);
+}
+
+#portfolio-hero .hero-menu a {
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+#portfolio-hero .hero-menu a:hover {
+  color: var(--accent);
+}

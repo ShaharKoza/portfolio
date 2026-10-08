@@ -1,93 +1,122 @@
 ---
-// Editorial three-column work row, per the design reference:
-// [year | title | description + stack], hover shifts inward and warms to accent.
+// One cell in the work spread. Every project uses the same scale.
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  index: number;
 }
 
-const { project } = Astro.props;
-const { title, summary, year, tags, stat } = project.data;
+const { project, index } = Astro.props;
+const { title, summary, tags, stat, year } = project.data;
+const links = project.data.links ?? [];
+const n = String(index).padStart(2, '0');
+const label = stat ? `${title}. ${stat}` : title;
+const payload = JSON.stringify({ title, year, stat: stat ?? '', summary, tags, links });
 ---
 
-<a href={`/projects/${project.id}/`} class="row">
-  <span class="year">{year}</span>
-  <span class="title">{title}</span>
-  <span class="detail">
-    {stat && <span class="stat">{stat}</span>}
-    <span class="desc">{summary}</span>
-    {tags.length > 0 && <span class="stack">{tags.join(' · ')}</span>}
+<button type="button" class="piece" data-project={payload} aria-label={label}>
+  <span class="index">{n}</span>
+  <span class="title">
+    {title}
+    <span class="go" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </span>
   </span>
-</a>
+  {stat && <span class="stat">{stat}</span>}
+  <span class="desc">{summary}</span>
+  {tags.length > 0 && <span class="stack">{tags.join(' · ')}</span>}
+</button>
 
 <style>
-  .row {
-    display: grid;
-    grid-template-columns: 96px 1fr 360px;
-    gap: 32px;
-    align-items: baseline;
-    padding-block: 24px;
-    border-top: 1px solid var(--line-soft);
-    transition: color var(--transition), padding-inline-start 250ms ease;
+  .piece {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+    min-width: 0;
+    color: var(--ink);
   }
 
-  .row:last-of-type {
-    border-bottom: 1px solid var(--line-soft);
+  .piece:hover {
+    color: var(--ink);
   }
 
-  .row:hover {
-    color: var(--accent);
-    padding-inline-start: 10px;
-  }
-
-  .year {
+  .index {
     font-family: var(--font-mono);
-    font-size: var(--text-micro);
-    color: var(--ink-55);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    color: var(--ink-45);
   }
 
   .title {
-    font-size: var(--text-row);
-    letter-spacing: -0.01em;
-    line-height: 1.3;
+    font-size: clamp(1.35rem, 1.05rem + 0.7vw, 1.75rem);
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    text-wrap: balance;
   }
 
-  .detail {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  .piece:hover .title {
+    color: var(--accent);
+  }
+
+  .go {
+    display: inline-block;
+    width: 0.7em;
+    height: 0.7em;
+    margin-inline-start: 0.3em;
+    opacity: 0;
+    transform: translateX(-6px);
+    vertical-align: 0.08em;
+    transition: opacity var(--transition), transform var(--transition);
+  }
+
+  .go svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .piece:hover .go {
+    opacity: 1;
+    transform: none;
   }
 
   .stat {
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.02em;
+    font-size: 13px;
+    line-height: 1.45;
     color: var(--accent);
   }
 
   .desc {
-    font-size: 13px;
-    line-height: 1.65;
+    max-width: 42ch;
+    font-size: 14.5px;
+    line-height: 1.6;
     color: var(--ink-65);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .stack {
+    margin-top: 0.35rem;
     font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.06em;
+    font-size: 11px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--ink-55);
+    color: var(--ink-45);
   }
 
-  @media (max-width: 860px) {
-    .row {
-      grid-template-columns: 1fr;
-      gap: 8px;
+  @media (prefers-reduced-motion: reduce) {
+    .go {
+      transition: none;
     }
 
-    .row:hover {
-      padding-inline-start: 0;
+    .piece:hover .go {
+      transform: none;
     }
   }
 </style>

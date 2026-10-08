@@ -1,15 +1,15 @@
 ---
 title: 'Server Audit Automation'
-summary: 'Automated checks for client servers that automatically push data to a web dashboard I developed.'
+summary: 'Replaces a manual, hour-long process where technical support connects to a server to run over 50 checks. Now, the system executes these checks securely with a single click, presenting a fully organized and summarized report on a web dashboard. This drastically reduces manual effort, saves time, eliminates human errors, and streamlines technical operations.'
 year: 2026
 tags: ['TypeScript', 'Node.js', 'PostgreSQL', 'Express', 'PowerShell']
 featured: true
-order: 1
-stat: 'from the server to the dashboard'
+order: 3
+stat: 'One-click secure diagnostics dashboard'
 ---
 
-_Client project: the codebase is private._
-
-Automated checks run on client servers and push the data to a web dashboard
-I developed. The checks run without a manual collection pass, and the
-dashboard is where that data is reviewed.
+Replaces a manual, hour-long process where technical support connects to a
+server to run over 50 checks. Now, the system executes these checks securely
+with a single click, presenting a fully organized and summarized report on a
+web dashboard. This drastically reduces manual effort, saves time, eliminates
+human errors, and streamlines technical operations.

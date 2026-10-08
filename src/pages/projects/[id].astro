@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
 export async function getStaticPaths() {
@@ -9,16 +9,16 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { Content } = await render(project);
-const { title, summary, year, tags } = project.data;
+const { title, summary, year, tags, stat } = project.data;
 const links = project.data.links ?? [];
 ---
 
 <Base title={`${title} | Shahar Kozniak`} description={summary}>
-  <article class="project">
+  <article class="project container">
     <header class="page-header">
       <p class="eyebrow">Project · {year}</p>
       <h1>{title}</h1>
+      {stat && <p class="stat">{stat}</p>}
       <p class="muted lede">{summary}</p>
       <ul class="tags" aria-label="Technologies">
         {tags.map((tag) => <li>{tag}</li>)}
@@ -34,23 +34,23 @@ const links = project.data.links ?? [];
       }
     </header>
 
-    <div class="prose">
-      <Content />
-    </div>
-
-    <p class="back"><a href="/projects/">← All projects</a></p>
+    <p class="back"><a href="/#work">← All projects</a></p>
   </article>
 </Base>
 
 <style>
   .page-header {
-    padding-block: var(--space-2xl);
+    padding-block: var(--space-xl) var(--space-lg);
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
     max-width: var(--width-prose);
-    border-bottom: 1px solid var(--line);
-    margin-bottom: var(--space-xl);
+  }
+
+  .stat {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent);
   }
 
   .page-header h1 {
@@ -72,7 +72,7 @@ const links = project.data.links ?? [];
   .tags li {
     font-size: var(--text-micro);
     color: var(--ink-55);
-    background: rgba(38, 32, 26, 0.06);
+    background: color-mix(in srgb, var(--ink) 6%, transparent);
     border: 1px solid var(--line);
     border-radius: 2px;
     padding: 0.1rem 0.7rem;

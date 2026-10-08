@@ -17,6 +17,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
+  transition: background-color var(--transition), color var(--transition);
   font-family: var(--font-sans);
   font-size: var(--text-body);
   font-weight: 400;
@@ -130,6 +131,50 @@ a:hover {
   color: var(--ink-45);
 }
 
+/* Four equal cells. Two columns, then one column on a narrow screen. */
+#main .work-spread {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 3rem;
+  row-gap: 2.75rem;
+}
+
+#main .piece {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+#main button.piece {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+#main .piece .index,
+#main .piece .title,
+#main .piece .stat,
+#main .piece .desc,
+#main .piece .stack {
+  display: block;
+  max-width: 100%;
+}
+
+@media (max-width: 800px) {
+  #main .work-spread {
+    grid-template-columns: 1fr;
+    row-gap: 2.25rem;
+  }
+}
+
 /* --- Reveal on scroll (JS adds .is-visible) --- */
 [data-reveal] {
   opacity: 0;
@@ -147,6 +192,32 @@ a:hover {
   to { opacity: 1; transform: translateY(0); }
 }
 
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+}
+
+.theme-icon {
+  display: block;
+}
+
+html:not(.light) .theme-icon-moon,
+html.light .theme-icon-sun {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -161,6 +232,12 @@ a:hover {
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  body,
+  .site-header,
+  #portfolio-hero .hero-bar {
+    transition: none;
   }
 }
 
@@ -213,12 +290,12 @@ a:hover {
   font-family: var(--font-mono);
   font-size: 0.85em;
   color: var(--accent);
-  background: rgba(38, 32, 26, 0.05);
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
   padding: 0.1em 0.35em;
 }
 
 .prose pre {
-  background: rgba(38, 32, 26, 0.05);
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
   border: 1px solid var(--line-soft);
   padding: var(--space-md);
   overflow-x: auto;
@@ -232,7 +309,7 @@ a:hover {
 
 .prose a {
   color: var(--accent);
-  border-bottom: 1px solid rgba(107, 68, 35, 0.4);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
   padding-bottom: 1px;
 }
 
@@ -242,7 +319,7 @@ a:hover {
 
 /* --- Scrollbar --- */
 html {
-  scrollbar-color: rgba(38, 32, 26, 0.3) var(--bg);
+  scrollbar-color: color-mix(in srgb, var(--ink) 30%, transparent) var(--bg);
 }
 
 ::-webkit-scrollbar {
@@ -254,10 +331,10 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(38, 32, 26, 0.25);
+  background: color-mix(in srgb, var(--ink) 25%, transparent);
   border: 2px solid var(--bg);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(38, 32, 26, 0.4);
+  background: color-mix(in srgb, var(--ink) 40%, transparent);
 }

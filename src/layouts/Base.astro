@@ -4,13 +4,15 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
+  hideHeader?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, hideHeader = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 
 const nav = [
   { href: '/#work', label: 'Work' },
+  { href: '/#experience', label: 'Experience' },
   { href: '/#practice', label: 'Practice' },
   { href: '/ai-guide/', label: 'AI Guide' },
 ];
@@ -33,11 +35,22 @@ const year = new Date().getFullYear();
     <meta property="og:image" content={new URL('/og.png', Astro.site)} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={new URL('/og.png', Astro.site)} />
-    <meta name="theme-color" content="#faf7f2" />
+    <meta name="theme-color" content="#090909" />
+    <script is:inline>
+      (function () {
+        try {
+          var light = localStorage.getItem("theme") === "light";
+          if (light) document.documentElement.classList.add("light");
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute("content", light ? "#faf7f2" : "#090909");
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
+    {!hideHeader && (
     <header class="site-header">
       <a class="wordmark" href="/">Shahar Kozniak</a>
       <nav aria-label="Main">
@@ -50,11 +63,18 @@ const year = new Date().getFullYear();
             ))
           }
           <li>
-            <a class="contact-link" href="mailto:kshahar1315@gmail.com">Contact</a>
+            <a class="contact-link" href="mailto:shaharkozniak@gmail.com">Contact</a>
+          </li>
+          <li>
+            <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme">
+              <svg class="theme-icon theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+              <svg class="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+            </button>
           </li>
         </ul>
       </nav>
     </header>
+    )}
 
     <main id="main">
       <slot />
@@ -65,7 +85,100 @@ const year = new Date().getFullYear();
       <span>© {year}</span>
     </footer>
 
+    <dialog id="project-dialog" class="project-dialog" aria-labelledby="project-dialog-title">
+      <button type="button" class="project-dialog-close" data-close-project>Close</button>
+      <p class="eyebrow" data-project-kicker></p>
+      <h2 id="project-dialog-title" data-project-title></h2>
+      <p class="project-dialog-stat" data-project-stat hidden></p>
+      <p class="project-dialog-summary" data-project-summary></p>
+      <ul class="project-dialog-tags" data-project-tags></ul>
+      <p class="project-dialog-links" data-project-links></p>
+    </dialog>
+
     <script>
+      const applyTheme = (theme: "light" | "dark") => {
+        const light = theme === "light";
+        document.documentElement.classList.toggle("light", light);
+        document.querySelector('meta[name="theme-color"]')?.setAttribute("content", light ? "#faf7f2" : "#090909");
+        document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]").forEach((button) => {
+          button.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
+        });
+      };
+
+      applyTheme(document.documentElement.classList.contains("light") ? "light" : "dark");
+
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof Element) || !target.closest("[data-theme-toggle]")) return;
+        const next = document.documentElement.classList.contains("light") ? "dark" : "light";
+        try {
+          localStorage.setItem("theme", next);
+        } catch (e) {}
+        applyTheme(next);
+      });
+
+      const projectDialog = document.querySelector<HTMLDialogElement>('#project-dialog');
+      const projectKicker = projectDialog?.querySelector<HTMLElement>('[data-project-kicker]');
+      const projectTitle = projectDialog?.querySelector<HTMLElement>('[data-project-title]');
+      const projectStat = projectDialog?.querySelector<HTMLElement>('[data-project-stat]');
+      const projectSummary = projectDialog?.querySelector<HTMLElement>('[data-project-summary]');
+      const projectTags = projectDialog?.querySelector<HTMLElement>('[data-project-tags]');
+      const projectLinks = projectDialog?.querySelector<HTMLElement>('[data-project-links]');
+
+      type ProjectDetails = {
+        title: string;
+        year: number;
+        stat: string;
+        summary: string;
+        tags: string[];
+        links: { label: string; href: string }[];
+      };
+
+      const openProject = (raw: string) => {
+        if (!projectDialog || !projectTitle || !projectSummary || !projectTags || !projectLinks || !projectKicker || !projectStat) return;
+        let data: ProjectDetails;
+        try {
+          data = JSON.parse(raw) as ProjectDetails;
+        } catch {
+          return;
+        }
+        projectKicker.textContent = `Project · ${data.year}`;
+        projectTitle.textContent = data.title;
+        projectSummary.textContent = data.summary;
+        projectStat.hidden = !data.stat;
+        projectStat.textContent = data.stat;
+        projectTags.replaceChildren();
+        for (const tag of data.tags) {
+          const item = document.createElement('li');
+          item.textContent = tag;
+          projectTags.append(item);
+        }
+        projectTags.hidden = data.tags.length === 0;
+        projectLinks.replaceChildren();
+        for (const link of data.links) {
+          const anchor = document.createElement('a');
+          anchor.href = link.href;
+          anchor.target = '_blank';
+          anchor.rel = 'noopener noreferrer';
+          anchor.textContent = link.label;
+          projectLinks.append(anchor);
+        }
+        projectLinks.hidden = data.links.length === 0;
+        projectDialog.showModal();
+      };
+
+      document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof Element) || !projectDialog) return;
+        const opener = target.closest<HTMLElement>('[data-project]');
+        if (opener) {
+          const raw = opener.getAttribute('data-project');
+          if (raw) openProject(raw);
+          return;
+        }
+        if (target.closest('[data-close-project]') || target === projectDialog) projectDialog.close();
+      });
+
       const els = document.querySelectorAll('[data-reveal]');
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
         els.forEach((el) => el.classList.add('is-visible'));
@@ -93,14 +206,14 @@ const year = new Date().getFullYear();
     inset-inline-start: var(--pad-x);
     top: -100%;
     background: var(--accent);
-    color: #fff;
+    color: var(--on-accent);
     padding: 0.5rem 1rem;
     z-index: 100;
   }
 
   .skip-link:focus {
     top: 0;
-    color: #fff;
+    color: var(--on-accent);
   }
 
   .site-header {
@@ -112,7 +225,8 @@ const year = new Date().getFullYear();
     justify-content: space-between;
     padding: 20px var(--pad-x);
     border-bottom: 1px solid var(--line);
-    background: rgba(250, 247, 242, 0.92);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    transition: background-color var(--transition), border-color var(--transition);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
@@ -146,6 +260,98 @@ const year = new Date().getFullYear();
     border-color: var(--accent);
   }
 
+  .project-dialog {
+    width: min(34rem, calc(100vw - 2rem));
+    max-height: min(78vh, 40rem);
+    margin: auto;
+    padding: 1.35rem 1.4rem 1.6rem;
+    overflow: auto;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  .project-dialog [hidden] {
+    display: none;
+  }
+
+  .project-dialog::backdrop {
+    background: color-mix(in srgb, #000 64%, transparent);
+  }
+
+  .project-dialog-close {
+    position: absolute;
+    top: 0.85rem;
+    inset-inline-end: 0.9rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--ink-55);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .project-dialog-close:hover {
+    color: var(--accent);
+  }
+
+  .project-dialog h2 {
+    max-width: 18ch;
+    margin: 0.35rem 2.5rem 0.7rem 0;
+    font-size: clamp(1.55rem, 1.2rem + 1vw, 2.05rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+  }
+
+  .project-dialog-stat {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent);
+  }
+
+  .project-dialog-summary {
+    margin: 0;
+    max-width: 58ch;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--ink-70);
+  }
+
+  .project-dialog-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 1.1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .project-dialog-tags li {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-55);
+    border: 1px solid var(--line);
+    padding: 0.2rem 0.5rem;
+  }
+
+  .project-dialog-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.1rem 0 0;
+  }
+
+  .project-dialog-links a {
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+
   .site-footer {
     border-top: 1px solid var(--line);
     padding: 18px var(--pad-x);
@@ -158,13 +364,20 @@ const year = new Date().getFullYear();
     color: var(--ink-55);
   }
 
-  @media (max-width: 640px) {
-    nav ul {
-      gap: 16px;
+    @media (max-width: 980px) {
+    .site-header {
+      flex-wrap: wrap;
+      row-gap: 12px;
+      padding-block: 14px;
     }
 
-    .site-header {
-      padding-block: 14px;
+    .site-header nav {
+      flex: 1 1 100%;
+    }
+
+    nav ul {
+      flex-wrap: wrap;
+      gap: 10px 16px;
     }
   }
 </style>
