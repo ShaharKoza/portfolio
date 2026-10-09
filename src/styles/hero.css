@@ -2,7 +2,6 @@
 @import "tailwindcss/theme.css" layer(theme) source(none);
 @import "tailwindcss/utilities.css" layer(utilities) source(none);
 @source "../components/hero/**/*.tsx";
-@source "../components/ui/**/*.tsx";
 
 /* Unlayered so these beat the site-wide element styles. */
 #portfolio-hero {
@@ -91,6 +90,26 @@
 
 #portfolio-hero a.hero-icon:hover {
   color: var(--accent);
+}
+
+#portfolio-hero .hero-name {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+#portfolio-hero .hero-menu {
+  background: var(--bg);
+}
+
+#portfolio-hero .hero-social {
+  list-style: none;
 }
 
 #portfolio-hero .hero-menu a {

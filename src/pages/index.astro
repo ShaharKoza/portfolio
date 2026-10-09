@@ -1,18 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import SkillsMarquee from '../components/SkillsMarquee.astro';
+import Practice from '../components/Practice.astro';
 import { PortfolioHero } from '../components/hero/PortfolioHero';
+import { getVisibleProjects } from '../lib/projects';
+import { site } from '../lib/site';
 
-// Drafts stay visible in dev so they can be previewed, but never ship in a build.
-const showDrafts = import.meta.env.DEV;
-
-const featured = (
-  await getCollection('projects', ({ data }) => (showDrafts || !data.draft) && data.featured)
-)
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 4);
+const featured = (await getVisibleProjects()).filter((project) => project.data.featured).slice(0, 4);
 ---
 
 <Base
@@ -76,12 +70,12 @@ const featured = (
         <span class="section-num">03</span>
       </div>
       <p class="contact-lede">
-        <a class="email" href="mailto:shaharkozniak@gmail.com">shaharkozniak@gmail.com</a>
+        <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
       </p>
       <div class="contact-links">
-        <a href="https://github.com/ShaharKoza">GitHub</a>
-        <a href="https://www.linkedin.com/in/shahar-kozniak">LinkedIn</a>
-        <a href="/Shahar-Kozniak-CV.pdf">CV</a>
+        <a href={site.github}>GitHub</a>
+        <a href={site.linkedin}>LinkedIn</a>
+        <a href={site.cv}>CV</a>
       </div>
     </div>
   </section>
@@ -93,7 +87,7 @@ const featured = (
         <h2>Practice</h2>
         <span class="section-num">04</span>
       </div>
-      <SkillsMarquee />
+      <Practice />
     </div>
   </section>
 </Base>
@@ -172,6 +166,11 @@ const featured = (
     color: var(--accent);
     border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
     padding-bottom: 2px;
+  }
+
+  .email:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
   }
 
   .contact-links {

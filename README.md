@@ -1,13 +1,7 @@
 # Shahar Kozniak: Portfolio
 
-Personal site of Shahar Kozniak, AI & Automation Developer: projects, profile,
-and an AI field guide. Built with [Astro](https://astro.build), a hand-rolled
-design-token system (no CSS framework), self-hosted fonts, and light vanilla
-JS for the animations.
-
-Design: dark theme with glowing gradient accents, animated aurora
-background, scroll-reveal sections, mouse-follow card glow, skills marquee,
-and a cursor spotlight.
+Personal site of Shahar Kozniak, AI & Automation Developer. Astro static
+build. Dark by default, warm paper theme on `html.light`, lime accent.
 
 ## Commands
 
@@ -19,32 +13,32 @@ npm run preview    # serve the production build locally
 npm run check      # astro type/content checks
 ```
 
-## Adding content
+## Layout
 
-Drop a Markdown file into the right collection. Frontmatter is typed and
-validated at build time (`src/content.config.ts`):
+- `src/lib/site.ts`: shared name, email, social links, and nav labels.
+- `src/lib/projects.ts`: draft filter and sort for the project collection.
+- `src/content/projects/<slug>.md`: one file per project. Filename is the slug.
+- `src/styles/tokens.css`: colors, type, spacing. Dark tokens on `:root`,
+  paper tokens on `html.light`.
+- `src/styles/global.css`: reset, section rules, the equal project grid, reveal.
+- `src/styles/hero.css`: homepage hero only. Tailwind utilities, no preflight.
+- `src/components/hero/PortfolioHero.tsx`: the only React island.
+- `src/scripts/site.ts`: theme toggle, project dialog, scroll reveal.
+- `src/layouts/Base.astro`: head, header, footer. The homepage hides the
+  header because the hero has its own bar.
 
-- **Project**: `src/content/projects/<slug>.md` with `title`, `summary`,
-  `year`, `tags`, `featured` (shows on the home page), `order`, optional
-  `stat`, optional `links` (a list of `{ label, href }`), `draft`.
+## Adding a project
 
-Entries with `draft: true` render in `npm run dev` but are excluded from
-production builds.
+Frontmatter is validated in `src/content.config.ts`: `title`, `summary`,
+`year`, `tags`, `featured`, `order`, optional `stat`, optional `links`
+(`{ label, href }`), `draft`.
 
-## Before publishing: TODO
-
-- [ ] Decide the final public project list (see `SITE-CHANGES.md`)
+`draft: true` shows in `npm run dev` and is left out of `npm run build`.
+Featured projects on the homepage are the first four with `featured: true`, by `order`.
 
 ## Writing rules for site copy
 
-- No em dashes / long dashes anywhere. Use commas, colons, or periods.
-- Projects are described at capability level only: no employer names or
-  internal details.
-
-## Design system
-
-All visual decisions live in `src/styles/tokens.css` (colors, gradient,
-glows, type scale, spacing). `src/styles/global.css` holds the reset, base
-styles, button/gradient utilities, the scroll-reveal classes, and `.prose`.
-Interactive behavior (reveal observer, card glow, cursor spotlight) lives in
-one script inside `src/layouts/Base.astro`.
+- No em dashes or long dashes. Use commas, colons, or periods.
+- Projects stay at capability level: no employer names or internal details,
+  except copy already written into Experience, Education, and the Tevel
+  Metro line.

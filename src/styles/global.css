@@ -1,6 +1,7 @@
 @import './tokens.css';
 @import '@fontsource/ibm-plex-mono/400.css';
 @import '@fontsource/ibm-plex-mono/500.css';
+@import '@fontsource/ibm-plex-mono/700.css';
 
 /* --- Reset & base --- */
 *,
@@ -79,15 +80,6 @@ a:hover {
   border-color: var(--accent);
 }
 
-/* --- Mono micro-labels --- */
-.mono-label {
-  font-family: var(--font-mono);
-  font-size: var(--text-micro);
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--text-micro);
@@ -162,10 +154,18 @@ a:hover {
 #main .piece .index,
 #main .piece .title,
 #main .piece .stat,
-#main .piece .desc,
 #main .piece .stack {
   display: block;
   max-width: 100%;
+}
+
+#main .piece .desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  max-width: 42ch;
+  overflow: hidden;
 }
 
 @media (max-width: 800px) {
@@ -175,21 +175,16 @@ a:hover {
   }
 }
 
-/* --- Reveal on scroll (JS adds .is-visible) --- */
-[data-reveal] {
+/* --- Reveal on scroll. Hidden only after the head script marks JS. --- */
+html.js [data-reveal] {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity var(--transition-slow), transform var(--transition-slow);
 }
 
-[data-reveal].is-visible {
+html.js [data-reveal].is-visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-@keyframes riseIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .theme-toggle {
@@ -223,9 +218,11 @@ html.light .theme-icon-sun {
     scroll-behavior: auto;
   }
 
-  [data-reveal] {
-    opacity: 1;
-    transform: none;
+  [data-reveal],
+  #portfolio-hero h1 span {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
     transition: none;
   }
 
@@ -239,82 +236,6 @@ html.light .theme-icon-sun {
   #portfolio-hero .hero-bar {
     transition: none;
   }
-}
-
-/* --- Prose (project pages) --- */
-.prose {
-  max-width: var(--width-prose);
-  font-size: var(--text-md);
-  line-height: 1.75;
-  color: var(--ink-85);
-}
-
-.prose p {
-  margin-block: 0 1.25em;
-}
-
-.prose h2 {
-  font-size: 14px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  margin: 2.2em 0 1em;
-}
-
-.prose h3 {
-  font-size: var(--text-md);
-  font-weight: 500;
-  margin: 1.8em 0 0.7em;
-}
-
-.prose ul, .prose ol {
-  padding-inline-start: 1.2em;
-  margin-block: 0 1.25em;
-}
-
-.prose li {
-  margin-block: 0.35em;
-}
-
-.prose li::marker {
-  color: var(--accent);
-}
-
-.prose blockquote {
-  margin: 1.5em 0;
-  padding-inline-start: 1.2em;
-  border-inline-start: 2px solid var(--accent);
-  color: var(--ink-70);
-}
-
-.prose code {
-  font-family: var(--font-mono);
-  font-size: 0.85em;
-  color: var(--accent);
-  background: color-mix(in srgb, var(--ink) 6%, transparent);
-  padding: 0.1em 0.35em;
-}
-
-.prose pre {
-  background: color-mix(in srgb, var(--ink) 6%, transparent);
-  border: 1px solid var(--line-soft);
-  padding: var(--space-md);
-  overflow-x: auto;
-}
-
-.prose pre code {
-  background: none;
-  padding: 0;
-  color: var(--ink);
-}
-
-.prose a {
-  color: var(--accent);
-  border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-  padding-bottom: 1px;
-}
-
-.prose strong {
-  font-weight: 500;
 }
 
 /* --- Scrollbar --- */

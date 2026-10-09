@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="Not found | Shahar Kozniak" description="This page doesn't exist.">
+<Base title="Not found | Shahar Kozniak" description="This page doesn't exist." noindex>
   <div class="notfound">
     <p class="eyebrow">404</p>
     <h1>Page not found</h1>
@@ -14,6 +14,7 @@ import Base from '../layouts/Base.astro';
 <style>
   .notfound {
     padding-block: var(--space-3xl);
+    padding-inline: var(--pad-x);
     display: flex;
     flex-direction: column;
     align-items: flex-start;

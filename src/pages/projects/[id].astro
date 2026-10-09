@@ -1,16 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import { getVisibleProjects } from '../../lib/projects';
 
 export async function getStaticPaths() {
-  const showDrafts = import.meta.env.DEV;
-  const projects = await getCollection('projects', ({ data }) => showDrafts || !data.draft);
+  const projects = await getVisibleProjects();
   return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
 }
 
 const { project } = Astro.props;
 const { title, summary, year, tags, stat } = project.data;
-const links = project.data.links ?? [];
+const links = (project.data.links ?? []).filter((link) => link.href.startsWith('https://'));
 ---
 
 <Base title={`${title} | Shahar Kozniak`} description={summary}>
@@ -34,7 +33,7 @@ const links = project.data.links ?? [];
       }
     </header>
 
-    <p class="back"><a href="/#work">← All projects</a></p>
+    <p class="back"><a href="/projects/">← All projects</a></p>
   </article>
 </Base>
 

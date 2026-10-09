@@ -1,21 +1,15 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Menu, Moon, Sun, X } from "lucide-react";
-import { Button } from "../ui/button";
+import { contact, nav, site } from "../../lib/site";
 import "../../styles/hero.css";
 
-const NAV = [
-  { href: "/#work", label: "Work" },
-  { href: "/#experience", label: "Experience" },
-  { href: "/#practice", label: "Practice" },
-  { href: "/ai-guide/", label: "AI Guide" },
-  { href: "mailto:shaharkozniak@gmail.com", label: "Contact" },
-];
+const NAV = [...nav, contact];
 
 const SOCIAL = [
-  { href: "https://github.com/ShaharKoza", label: "GitHub", icon: Github },
-  { href: "https://www.linkedin.com/in/shahar-kozniak", label: "LinkedIn", icon: Linkedin },
-  { href: "mailto:shaharkozniak@gmail.com", label: "Email", icon: Mail },
+  { href: site.github, label: "GitHub", icon: Github },
+  { href: site.linkedin, label: "LinkedIn", icon: Linkedin },
+  { href: `mailto:${site.email}`, label: "Email", icon: Mail },
 ];
 
 const INTRO = [
@@ -49,14 +43,22 @@ function BlurText({
   delay?: number;
 }) {
   const reduce = usePrefersReducedMotion();
+  const [run, setRun] = useState(false);
+  useEffect(() => {
+    if (!reduce) setRun(true);
+  }, [reduce]);
   return (
-    <span className={className} aria-label={text}>
+    <span className={className} aria-hidden="true">
       {text.split("").map((letter, i) => (
         <motion.span
           key={`${letter}-${i}`}
           className="inline-block"
-          initial={reduce ? false : { opacity: 0, y: 28, filter: "blur(12px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={false}
+          animate={
+            run
+              ? { opacity: [0, 1], y: [28, 0], filter: ["blur(12px)", "none"] }
+              : { opacity: 1, y: 0, filter: "none" }
+          }
           transition={{ duration: 0.55, delay: delay + i * 0.04, ease: [0.22, 1, 0.36, 1] }}
         >
           {letter}
@@ -82,20 +84,20 @@ export function PortfolioHero() {
           <Sun className="theme-icon theme-icon-sun" aria-hidden="true" />
           <Moon className="theme-icon theme-icon-moon" aria-hidden="true" />
         </button>
+        {open && (
+          <nav className="hero-menu absolute inset-x-0 top-full z-20 flex flex-col gap-4 px-6 py-6 sm:px-12">
+            {NAV.map((item) => (
+              <a key={item.label} href={item.href} onClick={() => setOpen(false)}>
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        )}
       </header>
-
-      {open && (
-        <nav className="hero-menu absolute inset-x-0 top-16 z-20 flex flex-col gap-4 px-6 py-6 sm:px-12" style={{ background: "var(--bg)" }}>
-          {NAV.map((item) => (
-            <a key={item.label} href={item.href} onClick={() => setOpen(false)}>
-              {item.label}
-            </a>
-          ))}
-        </nav>
-      )}
 
       <div className="flex flex-col items-center px-4 pb-6 pt-2 text-center sm:px-8">
         <h1>
+          <span className="hero-name">Shahar Kozniak</span>
           <BlurText text="SHAHAR" className="block" />
           <BlurText text="KOZNIAK" className="hero-accent block" delay={0.28} />
         </h1>
@@ -107,15 +109,15 @@ export function PortfolioHero() {
         </p>
 
         <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
-          <Button asChild>
-            <a href="mailto:shaharkozniak@gmail.com">Get in Touch</a>
-          </Button>
-          <Button asChild variant="outline">
-            <a href="/#work">View Projects</a>
-          </Button>
+          <a className="hero-btn hero-btn-primary" href={`mailto:${site.email}`}>
+            Get in Touch
+          </a>
+          <a className="hero-btn hero-btn-outline" href="/#work">
+            View Projects
+          </a>
         </div>
 
-        <ul className="mt-4 flex items-center gap-5 p-0" style={{ listStyle: "none" }}>
+        <ul className="hero-social mt-4 flex items-center gap-5 p-0">
           {SOCIAL.map((item) => (
             <li key={item.label}>
               <a
