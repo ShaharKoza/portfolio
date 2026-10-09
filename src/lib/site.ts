@@ -1,6 +1,6 @@
 export const site = {
   name: 'Shahar Kozniak',
-  email: 'shaharkozniak@gmail.com',
+  email: 'shahar@shaharkozniak.com',
   github: 'https://github.com/ShaharKoza',
   linkedin: 'https://www.linkedin.com/in/shahar-kozniak',
   cv: '/Shahar-Kozniak-CV.pdf',
