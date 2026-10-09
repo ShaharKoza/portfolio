@@ -18,7 +18,7 @@ const featured = (await getVisibleProjects()).filter((project) => project.data.f
 
   <!-- WORK -->
   <section id="work" class="band" data-reveal>
-    <div class="container section-pad work-pad">
+    <div class="container section-pad">
       <div class="section-head">
         <h2>Selected Work</h2>
         <span class="section-num">01</span>
@@ -31,8 +31,8 @@ const featured = (await getVisibleProjects()).filter((project) => project.data.f
   </section>
 
   <section id="experience" class="band" data-reveal>
-    <div class="container section-pad about-grid">
-      <div class="section-head about-head">
+    <div class="container section-pad">
+      <div class="section-head">
         <h2>Experience</h2>
         <span class="section-num">02</span>
       </div>
@@ -64,7 +64,7 @@ const featured = (await getVisibleProjects()).filter((project) => project.data.f
 
   <!-- CONTACT -->
   <section id="contact" class="band" data-reveal>
-    <div class="container contact-pad">
+    <div class="container section-pad">
       <div class="section-head">
         <h2>Contact</h2>
         <span class="section-num">03</span>
@@ -82,7 +82,7 @@ const featured = (await getVisibleProjects()).filter((project) => project.data.f
 
   <!-- SKILLS -->
   <section id="practice" class="band" data-reveal>
-    <div class="container section-pad practice-pad">
+    <div class="container section-pad">
       <div class="section-head">
         <h2>Practice</h2>
         <span class="section-num">04</span>
@@ -97,23 +97,9 @@ const featured = (await getVisibleProjects()).filter((project) => project.data.f
     padding-block: 56px 64px;
   }
 
-  .work-pad {
-    padding-top: 28px;
-  }
-
   .all-link {
     display: inline-block;
     margin-top: 28px;
-  }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 56px;
-  }
-
-  .about-head {
-    margin-bottom: 0;
   }
 
   .edu-label {
@@ -143,14 +129,6 @@ const featured = (await getVisibleProjects()).filter((project) => project.data.f
     font-size: var(--text-meta);
     line-height: 1.65;
     color: var(--ink-65);
-  }
-
-  .contact-pad {
-    padding-block: 56px 48px;
-  }
-
-  .practice-pad {
-    padding-bottom: 80px;
   }
 
   .contact-lede {
@@ -192,11 +170,6 @@ const featured = (await getVisibleProjects()).filter((project) => project.data.f
   }
 
   @media (max-width: 860px) {
-    .about-grid {
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
-
     .about-row {
       grid-template-columns: 1fr;
       gap: 6px;
