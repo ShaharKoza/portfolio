@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Menu, Moon, Sun, X } from "lucide-react";
 import { contact, nav, site } from "../../lib/site";
@@ -70,10 +70,31 @@ function BlurText({
 
 export function PortfolioHero() {
   const [open, setOpen] = useState(false);
+  const barRef = useRef<HTMLElement>(null);
+  const [barHeight, setBarHeight] = useState(0);
+
+  useEffect(() => {
+    const bar = barRef.current;
+    if (!bar) return;
+    const sync = () => setBarHeight(bar.offsetHeight);
+    sync();
+    const observer = new ResizeObserver(sync);
+    observer.observe(bar);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
-    <section id="portfolio-hero" className="relative">
-      <header className="hero-bar sticky top-0 z-30 flex items-center justify-between px-6 py-5 sm:px-12">
+    <section id="portfolio-hero" className="relative" style={open ? { paddingTop: barHeight } : undefined}>
+      <header ref={barRef} className={`hero-bar top-0 z-30 flex items-center justify-between px-6 py-5 sm:px-12 ${open ? "is-open" : "sticky"}`}>
         <button type="button" aria-expanded={open} aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((value) => !value)}>
           {open ? <X /> : <Menu />}
         </button>

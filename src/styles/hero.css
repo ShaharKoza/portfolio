@@ -51,6 +51,14 @@
   backdrop-filter: blur(10px);
 }
 
+/* Sticky is trapped in the hero. While the menu is open, pin the bar to the viewport. */
+#portfolio-hero .hero-bar.is-open {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 40;
+}
+
 #portfolio-hero a.hero-btn {
   display: inline-flex;
   align-items: center;
