@@ -13,12 +13,9 @@ const SOCIAL = [
 ];
 
 const INTRO = [
-  "I'm a Computer Science graduate focused on building practical AI and automation systems.",
-  "I develop LLM agents, n8n workflows, and Python integrations to solve real business bottlenecks.",
-  "By actively coding alongside advanced AI tools like Cursor, Claude Code, Antigravity, and Gemini,",
-  "I'm able to build and iterate rapidly. My approach is system-wide: successfully connecting software,",
-  "infrastructure, and business processes always starts with deep, precise characterization and planning",
-  "before any actual development.",
+  "I'm a Computer Science graduate.",
+  "I build AI and automation systems, mainly LLM agents, n8n workflows, and Python integrations.",
+  "I focus on turning manual processes into reliable automated ones.",
 ];
 
 function usePrefersReducedMotion() {
