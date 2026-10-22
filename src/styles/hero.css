@@ -21,7 +21,7 @@
 }
 
 #portfolio-hero .hero-accent {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 #portfolio-hero .hero-intro {
@@ -88,16 +88,70 @@
 }
 
 #portfolio-hero a.hero-btn-outline:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent-ink);
 }
 
-#portfolio-hero a.hero-icon {
-  color: var(--ink);
+#portfolio-hero .hero-nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
 }
 
-#portfolio-hero a.hero-icon:hover {
-  color: var(--accent);
+#portfolio-hero .hero-nav-glyph,
+#portfolio-hero .hero-nav-glyph::before,
+#portfolio-hero .hero-nav-glyph::after {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+  position: relative;
+}
+
+#portfolio-hero .hero-nav-glyph::before,
+#portfolio-hero .hero-nav-glyph::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+#portfolio-hero .hero-nav-glyph::before {
+  top: -5px;
+}
+
+#portfolio-hero .hero-nav-glyph::after {
+  top: 5px;
+}
+
+#portfolio-hero .hero-bar.is-open .hero-nav-glyph {
+  background: transparent;
+}
+
+#portfolio-hero .hero-bar.is-open .hero-nav-glyph::before,
+#portfolio-hero .hero-bar.is-open .hero-nav-glyph::after {
+  top: 0;
+}
+
+#portfolio-hero .hero-bar.is-open .hero-nav-glyph::before {
+  transform: rotate(45deg);
+}
+
+#portfolio-hero .hero-bar.is-open .hero-nav-glyph::after {
+  transform: rotate(-45deg);
+}
+
+#portfolio-hero .hero-social {
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+#portfolio-hero .hero-social a:hover {
+  color: var(--accent-ink);
 }
 
 #portfolio-hero .hero-name {
@@ -116,10 +170,6 @@
   background: var(--bg);
 }
 
-#portfolio-hero .hero-social {
-  list-style: none;
-}
-
 #portfolio-hero .hero-menu a {
   color: var(--ink);
   font-family: var(--font-mono);
@@ -129,5 +179,5 @@
 }
 
 #portfolio-hero .hero-menu a:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }

@@ -1,15 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Menu, Moon, Sun, X } from "lucide-react";
 import { contact, nav, site } from "../../lib/site";
 import "../../styles/hero.css";
 
 const NAV = [...nav, contact];
 
 const SOCIAL = [
-  { href: site.github, label: "GitHub", icon: Github },
-  { href: site.linkedin, label: "LinkedIn", icon: Linkedin },
-  { href: `mailto:${site.email}`, label: "Email", icon: Mail },
+  { href: site.github, label: "GitHub", external: true },
+  { href: site.linkedin, label: "LinkedIn", external: true },
+  { href: `mailto:${site.email}`, label: "Email", external: false },
 ];
 
 const INTRO = [
@@ -92,15 +91,15 @@ export function PortfolioHero() {
   return (
     <section id="portfolio-hero" className="relative" style={open ? { paddingTop: barHeight } : undefined}>
       <header ref={barRef} className={`hero-bar top-0 z-30 flex items-center justify-between px-6 py-5 sm:px-12 ${open ? "is-open" : "sticky"}`}>
-        <button type="button" aria-expanded={open} aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((value) => !value)}>
-          {open ? <X /> : <Menu />}
+        <button type="button" className="hero-nav-toggle" aria-expanded={open} aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((value) => !value)}>
+          <span className="hero-nav-glyph" />
         </button>
-        <a href="/" className="hero-accent font-mono text-sm tracking-[0.22em]">
+        <a href="/" className="hero-accent absolute left-1/2 -translate-x-1/2 font-mono text-sm tracking-[0.22em]">
           SK
         </a>
         <button type="button" className="theme-toggle" data-theme-toggle aria-label="Toggle color theme">
-          <Sun className="theme-icon theme-icon-sun" aria-hidden="true" />
-          <Moon className="theme-icon theme-icon-moon" aria-hidden="true" />
+          <span className="theme-word theme-word-light">Light</span>
+          <span className="theme-word theme-word-dark">Dark</span>
         </button>
         {open && (
           <nav className="hero-menu absolute inset-x-0 top-full z-20 flex flex-col gap-4 px-6 py-6 sm:px-12">
@@ -139,13 +138,11 @@ export function PortfolioHero() {
           {SOCIAL.map((item) => (
             <li key={item.label}>
               <a
-                className="hero-icon"
                 href={item.href}
-                aria-label={item.label}
-                target={item.href.startsWith("http") ? "_blank" : undefined}
-                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noopener noreferrer" : undefined}
               >
-                <item.icon size={20} />
+                {item.label}
               </a>
             </li>
           ))}

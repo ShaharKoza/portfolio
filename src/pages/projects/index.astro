@@ -23,7 +23,7 @@ const projects = await getVisibleProjects();
   </header>
 
   <div class="project-list work-spread">
-    {projects.map((project, i) => <ProjectCard project={project} index={i + 1} />)}
+    {projects.map((project) => <ProjectCard project={project} />)}
   </div>
   </div>
 </Base>

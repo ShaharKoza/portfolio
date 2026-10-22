@@ -57,7 +57,7 @@ a {
 }
 
 a:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 ::selection {
@@ -66,7 +66,7 @@ a:hover {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--accent-ink);
   outline-offset: 3px;
 }
 
@@ -77,14 +77,13 @@ a:hover {
 }
 
 .link:hover {
-  border-color: var(--accent);
+  border-color: var(--accent-ink);
 }
 
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--text-micro);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--ink-55);
 }
 
@@ -112,15 +111,9 @@ a:hover {
 }
 
 .section-head h2 {
-  font-size: 14px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.section-num {
-  font-family: var(--font-mono);
-  font-size: var(--text-micro);
-  color: var(--ink-45);
+  font-size: var(--text-md);
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
 /* Four equal cells. Two columns, then one column on a narrow screen. */
@@ -151,11 +144,16 @@ a:hover {
   cursor: pointer;
 }
 
-#main .piece .index,
 #main .piece .title,
-#main .piece .stat,
-#main .piece .stack {
+#main .piece .stat {
   display: block;
+  max-width: 100%;
+}
+
+#main .piece .stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.8rem;
   max-width: 100%;
 }
 
@@ -191,25 +189,29 @@ html.js [data-reveal].is-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
+  min-width: 28px;
   height: 28px;
   padding: 0;
   border: 0;
   background: none;
   color: var(--ink);
   cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .theme-toggle:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
-.theme-icon {
+.theme-word {
   display: block;
 }
 
-html:not(.light) .theme-icon-moon,
-html.light .theme-icon-sun {
+html:not(.light) .theme-word-dark,
+html.light .theme-word-light {
   display: none;
 }
 

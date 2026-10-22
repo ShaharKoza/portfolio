@@ -1,9 +1,10 @@
-/* Dark by default. html.light restores the warm paper theme. */
+/* Dark by default. html.light is the same system on a light field. */
 
 :root {
   --bg: #090909;
   --ink: #f4f4f5;
   --accent: #c6f135;
+  --accent-ink: var(--accent);
   --on-accent: #141414;
   --line: rgba(255, 255, 255, 0.14);
   --line-soft: rgba(255, 255, 255, 0.1);
@@ -44,17 +45,18 @@
 }
 
 html.light {
-  --bg: #faf7f2;
-  --ink: #26201a;
-  --accent: #6b4423;
-  --on-accent: #faf7f2;
-  --line: rgba(38, 32, 26, 0.14);
-  --line-soft: rgba(38, 32, 26, 0.12);
-  --ink-85: rgba(38, 32, 26, 0.85);
-  --ink-70: rgba(38, 32, 26, 0.7);
-  --ink-65: rgba(38, 32, 26, 0.65);
-  --ink-55: rgba(38, 32, 26, 0.55);
-  --ink-45: rgba(38, 32, 26, 0.45);
+  --bg: #f4f4f5;
+  --ink: #090909;
+  --accent: #c6f135;
+  --accent-ink: #5b6f18;
+  --on-accent: #141414;
+  --line: rgba(9, 9, 9, 0.14);
+  --line-soft: rgba(9, 9, 9, 0.1);
+  --ink-85: rgba(9, 9, 9, 0.85);
+  --ink-70: rgba(9, 9, 9, 0.72);
+  --ink-65: rgba(9, 9, 9, 0.65);
+  --ink-55: rgba(9, 9, 9, 0.63);
+  --ink-45: rgba(9, 9, 9, 0.57);
   color-scheme: light;
 }
 

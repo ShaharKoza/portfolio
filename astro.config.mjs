@@ -26,7 +26,7 @@ export default defineConfig({
       },
       // Hash of the head theme script. Astro does not hash is:inline scripts.
       scriptDirective: {
-        hashes: ['sha256-ydnI0GRluMyh/g0k9Dbct1xBhvWgxlLA5ZTZG+qCWZo='],
+        hashes: ['sha256-G+h/yGRxq/M9586kiRFu+KQjydYV5mZTsCZQw9KTEjg='],
       },
     },
   },
@@ -34,9 +34,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
     build: {
       sourcemap: false,
-    },
-    ssr: {
-      noExternal: ['lucide-react'],
     },
   },
 });

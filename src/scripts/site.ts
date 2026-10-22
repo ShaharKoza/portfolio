@@ -1,7 +1,7 @@
 const applyTheme = (theme: 'light' | 'dark') => {
   const light = theme === 'light';
   document.documentElement.classList.toggle('light', light);
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', light ? '#faf7f2' : '#090909');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', light ? '#f4f4f5' : '#090909');
   document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((button) => {
     button.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
   });

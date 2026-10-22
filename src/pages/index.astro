@@ -20,11 +20,10 @@ const featured = (await getVisibleProjects()).filter((project) => project.data.f
   <section id="work" class="band" data-reveal>
     <div class="container section-pad">
       <div class="section-head">
-        <h2>Selected Work</h2>
-        <span class="section-num">01</span>
+        <h2>Selected work</h2>
       </div>
       <div class="work-list work-spread">
-        {featured.map((project, i) => <ProjectCard project={project} index={i + 1} />)}
+        {featured.map((project) => <ProjectCard project={project} />)}
       </div>
       <a class="link all-link" href="/projects/">All projects</a>
     </div>
@@ -34,21 +33,20 @@ const featured = (await getVisibleProjects()).filter((project) => project.data.f
     <div class="container section-pad">
       <div class="section-head">
         <h2>Experience</h2>
-        <span class="section-num">02</span>
       </div>
       <div>
         <div class="about-rows">
           <div class="about-row">
             <span class="about-key">AI &amp; Automation Developer</span>
-            <span class="about-val">High Networks Ltd (2025–Present)</span>
+            <span class="about-val">High Networks Ltd (2025-Present)</span>
           </div>
           <div class="about-row">
             <span class="about-key">NOC Engineer</span>
-            <span class="about-val">Tevel Metro (2026–Present)</span>
+            <span class="about-val">Tevel Metro (2026-Present)</span>
           </div>
           <div class="about-row">
             <span class="about-key">IT Support Technician</span>
-            <span class="about-val">Priority Software (2024–2025)</span>
+            <span class="about-val">Priority Software (2024-2025)</span>
           </div>
         </div>
         <p class="eyebrow edu-label">Education</p>
@@ -67,7 +65,6 @@ const featured = (await getVisibleProjects()).filter((project) => project.data.f
     <div class="container section-pad">
       <div class="section-head">
         <h2>Contact</h2>
-        <span class="section-num">03</span>
       </div>
       <p class="contact-lede">
         <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
@@ -85,7 +82,6 @@ const featured = (await getVisibleProjects()).filter((project) => project.data.f
     <div class="container section-pad">
       <div class="section-head">
         <h2>Practice</h2>
-        <span class="section-num">04</span>
       </div>
       <Practice />
     </div>
@@ -141,14 +137,14 @@ const featured = (await getVisibleProjects()).filter((project) => project.data.f
   }
 
   .email {
-    color: var(--accent);
-    border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    color: var(--accent-ink);
+    border-bottom: 1px solid color-mix(in srgb, var(--accent-ink) 55%, transparent);
     padding-bottom: 2px;
   }
 
   .email:hover {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
+    color: var(--accent-ink);
+    border-bottom-color: var(--accent-ink);
   }
 
   .contact-links {
@@ -166,7 +162,7 @@ const featured = (await getVisibleProjects()).filter((project) => project.data.f
   }
 
   .contact-links a:hover {
-    border-color: var(--accent);
+    border-color: var(--accent-ink);
   }
 
   @media (max-width: 860px) {

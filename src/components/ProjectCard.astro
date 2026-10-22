@@ -4,18 +4,15 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   project: CollectionEntry<'projects'>;
-  index: number;
 }
 
-const { project, index } = Astro.props;
+const { project } = Astro.props;
 const { title, summary, tags, stat, year } = project.data;
 const links = project.data.links ?? [];
-const n = String(index).padStart(2, '0');
 const payload = JSON.stringify({ title, year, stat: stat ?? '', summary, tags, links });
 ---
 
 <button type="button" class="piece" data-project={payload} aria-haspopup="dialog">
-  <span class="index">{n}</span>
   <span class="title">
     {title}
     <span class="go" aria-hidden="true">
@@ -26,7 +23,11 @@ const payload = JSON.stringify({ title, year, stat: stat ?? '', summary, tags, l
   </span>
   {stat && <span class="stat">{stat}</span>}
   <span class="desc">{summary}</span>
-  {tags.length > 0 && <span class="stack">{tags.join(' · ')}</span>}
+  {tags.length > 0 && (
+    <span class="stack">
+      {tags.map((tag) => <span>{tag}</span>)}
+    </span>
+  )}
 </button>
 
 <style>
@@ -43,13 +44,6 @@ const payload = JSON.stringify({ title, year, stat: stat ?? '', summary, tags, l
     color: var(--ink);
   }
 
-  .index {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.16em;
-    color: var(--ink-45);
-  }
-
   .title {
     font-size: clamp(1.35rem, 1.05rem + 0.7vw, 1.75rem);
     letter-spacing: -0.03em;
@@ -59,7 +53,7 @@ const payload = JSON.stringify({ title, year, stat: stat ?? '', summary, tags, l
 
   .piece:hover .title,
   .piece:focus-visible .title {
-    color: var(--accent);
+    color: var(--accent-ink);
   }
 
   .go {
@@ -88,7 +82,7 @@ const payload = JSON.stringify({ title, year, stat: stat ?? '', summary, tags, l
     font-family: var(--font-mono);
     font-size: 13px;
     line-height: 1.45;
-    color: var(--accent);
+    color: var(--accent-ink);
   }
 
   .desc {
@@ -106,8 +100,7 @@ const payload = JSON.stringify({ title, year, stat: stat ?? '', summary, tags, l
     margin-top: 0.35rem;
     font-family: var(--font-mono);
     font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
     color: var(--ink-45);
   }
 
