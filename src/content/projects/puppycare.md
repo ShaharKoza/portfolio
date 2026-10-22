@@ -9,8 +9,6 @@ stat: 'Real-time sensor data pipeline'
 links:
   - label: iOS app
     href: https://github.com/ShaharKoza/PuppyCare
-  - label: Pi sensor station
-    href: https://github.com/ShaharKoza/smart-kennel
 ---
 
 An IoT kennel monitoring system running Python on a Raspberry Pi. It streams
